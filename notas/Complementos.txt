@@ -1,0 +1,24 @@
+https://scotch.io/tutorials/routing-react-apps-the-complete-guide (manual basico de React)
+https://scotch.io/tutorials/routing-react-apps-the-complete-guide
+https://reactstrap.github.io/ (manual de React con bootstrap)
+http://v4-alpha.getbootstrap.com/components/navbar/#color-schemes (Componentes de Bootstrap 4)
+https://github.com/ReactTraining/react-router (ReactRouter con bootstrap)
+
+https://www.desarrolloweb.com/articulos/primeros-pasos-react.html(react primeros pasos)
+
+https://www.uno-de-piera.com/lista-de-tareas-con-react/
+https://www.desarrolloweb.com/articulos/componentes-react-clases-es6.html
+https://www.solvetic.com/tutoriales/article/1619-primeros-pasos-con-react/
+
+https://github.com/oscaruhp/reactjs
+https://github.com/oscaruhp/reactjs
+
+https://html5hive.org/reactjs-form-validation-tutorial/ (Validacion de Formularios)
+
+https://github.com/ReactTraining/react-router/blob/master/docs/Introduction.md#adding-more-ui (React Route)
+
+https://gist.github.com/dabit3/0c2014b421f2bf98cd95d176f0b29bad(Navegacion Interna)
+
+https://github.com/whiplashmerch/whiplash-ui-library(Varios Ejemplos)
+
+https://runkit.com/npm/react-bootstrap-date-picker(Ejemplo de Calendaios)

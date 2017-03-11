@@ -1,0 +1,833 @@
+﻿Windows PowerShell
+Copyright (C) 2014 Microsoft Corporation. Todos los derechos reservados.
+
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git
+usage: git [--version] [--help] [-C <path>] [-c name=value]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working tree clean
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +0 ~1 -0 !]> rm .\index.html
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +0 ~0 -1 !]> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        deleted:    index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +0 ~0 -1 !]> git diff
+diff --git a/index.html b/index.html
+deleted file mode 100644
+index b428b77..0000000
+--- a/index.html
++++ /dev/null
+@@ -1,11 +0,0 @@
+-<!DOCTYPE html>
+-<html>
+-       <head>
+-               <meta charset="utf-8">
+-               <title>Test 1</title>
+-       </head>
+-       <body>
+-               <h1>Welcome</h1>
+-               <h2>demo 1</h2>
+-       </body>
+-</html>
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +0 ~0 -1 !]> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        deleted:    index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +0 ~0 -1 !]> git checkout -- index.html
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working tree clean
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working tree clean
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +0 ~1 -0 !]> git add index.html
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +0 ~1 -0 ~]> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   index.html
+
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +0 ~1 -0 ~]> dir
+
+
+    Directorio: C:\Users\Roberto\Documents\GitHubN\test1
+
+
+Mode                LastWriteTime     Length Name
+----                -------------     ------ ----
+-a---     20/12/2016  05:03 p. m.        177 index.html
+-a---     20/12/2016  11:57 a. m.          7 README.md
+-a---     20/12/2016  05:09 p. m.          0 test1.txt
+
+
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +0 ~1 -0 | +1 ~0 -0 !]> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   index.html
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        test1.txt
+
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +0 ~1 -0 | +1 ~0 -0 !]> git add test1.txt
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +1 ~1 -0 ~]> git commit
+[master 1ece29f] nuevo archivo y editado el html
+ 2 files changed, 1 insertion(+)
+ create mode 100644 test1.txt
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↑]> git reset --soft HEAD~1
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +1 ~1 -0 ~]> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   index.html
+        new file:   test1.txt
+
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡ +1 ~1 -0 ~]> git commit -m "nuevo file y html editado"
+[master 8225d9d] nuevo file y html editado
+ 2 files changed, 1 insertion(+)
+ create mode 100644 test1.txt
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↑]> git remote
+origin
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↑]> git remote -v
+origin  https://github.com/Noljaron/test1.git (fetch)
+origin  https://github.com/Noljaron/test1.git (push)
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↑]> git push origin master
+Counting objects: 4, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 396 bytes | 0 bytes/s, done.
+Total 4 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local objects.
+To https://github.com/Noljaron/test1.git
+   7e35fdf..8225d9d  master -> master
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git status
+On branch master
+Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+nothing to commit, working tree clean
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↓]> git pull origin master
+From https://github.com/Noljaron/test1
+ * branch            master     -> FETCH_HEAD
+Updating 8225d9d..27c0a26
+Fast-forward
+ index.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git log
+commit 27c0a265756c932658dfb797d21327ad94b7934d
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 17:24:32 2016 -0600
+
+    Update index.html
+
+commit 8225d9d99f03641a0d56e0142d3c7049fe6f6db8
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 17:17:52 2016 -0600
+
+    nuevo file y html editado
+
+commit 7e35fdf5ce88539c31cf3e21737794c6de4ca226
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 13:02:02 2016 -0600
+
+    meta charset
+
+    Charset UTF-8
+
+commit 38ec29e4727c015480f3406b283d1b02d44647d2
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 12:59:01 2016 -0600
+
+    new html
+
+    demo creando nuevo html
+
+commit 94ad29352691e02a871e8e621e28f6ad6cfa82ac
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 11:38:45 2016 -0600
+
+    Initial commit
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git branch
+* master
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git branch first-script
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git branch
+  first-script
+* master
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git checkout first-script
+Switched to branch 'first-script'
+C:\Users\Roberto\Documents\GitHubN\test1 [first-script]> git commit -am "script"
+[first-script badf6f0] script
+ 1 file changed, 4 insertions(+)
+C:\Users\Roberto\Documents\GitHubN\test1 [first-script]> git log
+commit badf6f043484daa94d3a2b85bae2eeb1085a8b67
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:00:54 2016 -0600
+
+    script
+
+commit 27c0a265756c932658dfb797d21327ad94b7934d
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 17:24:32 2016 -0600
+
+    Update index.html
+
+commit 8225d9d99f03641a0d56e0142d3c7049fe6f6db8
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 17:17:52 2016 -0600
+
+    nuevo file y html editado
+
+commit 7e35fdf5ce88539c31cf3e21737794c6de4ca226
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 13:02:02 2016 -0600
+
+    meta charset
+
+    Charset UTF-8
+
+commit 38ec29e4727c015480f3406b283d1b02d44647d2
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 12:59:01 2016 -0600
+
+    new html
+
+    demo creando nuevo html
+
+commit 94ad29352691e02a871e8e621e28f6ad6cfa82ac
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 11:38:45 2016 -0600
+
+    Initial commit
+C:\Users\Roberto\Documents\GitHubN\test1 [first-script]> git log --decorate
+commit badf6f043484daa94d3a2b85bae2eeb1085a8b67 (HEAD -> first-script)
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:00:54 2016 -0600
+
+    script
+
+commit 27c0a265756c932658dfb797d21327ad94b7934d (origin/master, origin/HEAD, master)
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 17:24:32 2016 -0600
+
+    Update index.html
+
+commit 8225d9d99f03641a0d56e0142d3c7049fe6f6db8
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 17:17:52 2016 -0600
+
+    nuevo file y html editado
+
+commit 7e35fdf5ce88539c31cf3e21737794c6de4ca226
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 13:02:02 2016 -0600
+
+    meta charset
+
+    Charset UTF-8
+
+commit 38ec29e4727c015480f3406b283d1b02d44647d2
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 12:59:01 2016 -0600
+
+    new html
+
+    demo creando nuevo html
+
+commit 94ad29352691e02a871e8e621e28f6ad6cfa82ac
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 11:38:45 2016 -0600
+
+    Initial commit
+C:\Users\Roberto\Documents\GitHubN\test1 [first-script]> git checkout master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git checkout -b fix-texto
+Switched to a new branch 'fix-texto'
+C:\Users\Roberto\Documents\GitHubN\test1 [fix-texto]> git branch
+  first-script
+* fix-texto
+  master
+C:\Users\Roberto\Documents\GitHubN\test1 [fix-texto]> git commit -am "texto en negrita"
+[fix-texto d7c7986] texto en negrita
+ 1 file changed, 1 insertion(+)
+C:\Users\Roberto\Documents\GitHubN\test1 [fix-texto]> git status
+On branch fix-texto
+nothing to commit, working tree clean
+C:\Users\Roberto\Documents\GitHubN\test1 [fix-texto]> git checkout master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git log --graph
+* commit 27c0a265756c932658dfb797d21327ad94b7934d
+| Author: Noljaron <algo_rnovoa_27@hotmail.com>
+| Date:   Tue Dec 20 17:24:32 2016 -0600
+|
+|     Update index.html
+|
+* commit 8225d9d99f03641a0d56e0142d3c7049fe6f6db8
+| Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+| Date:   Tue Dec 20 17:17:52 2016 -0600
+|
+|     nuevo file y html editado
+|
+* commit 7e35fdf5ce88539c31cf3e21737794c6de4ca226
+| Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+| Date:   Tue Dec 20 13:02:02 2016 -0600
+|
+|     meta charset
+|
+|     Charset UTF-8
+|
+* commit 38ec29e4727c015480f3406b283d1b02d44647d2
+| Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+| Date:   Tue Dec 20 12:59:01 2016 -0600
+|
+|     new html
+|
+|     demo creando nuevo html
+|
+* commit 94ad29352691e02a871e8e621e28f6ad6cfa82ac
+  Author: Noljaron <algo_rnovoa_27@hotmail.com>
+  Date:   Tue Dec 20 11:38:45 2016 -0600
+
+      Initial commit
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git log --graph --decorate --oneline
+* 27c0a26 (HEAD -> master, origin/master, origin/HEAD) Update index.html
+* 8225d9d nuevo file y html editado
+* 7e35fdf meta charset
+* 38ec29e new html
+* 94ad293 Initial commit
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git log --graph --decorate --oneline --all
+* d7c7986 (fix-texto) texto en negrita
+| * badf6f0 (first-script) script
+|/
+* 27c0a26 (HEAD -> master, origin/master, origin/HEAD) Update index.html
+* 8225d9d nuevo file y html editado
+* 7e35fdf meta charset
+* 38ec29e new html
+* 94ad293 Initial commit
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git checkout master
+Already on 'master'
+Your branch is up-to-date with 'origin/master'.
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git merge fix-texto
+Updating 27c0a26..d7c7986
+Fast-forward
+ index.html | 1 +
+ 1 file changed, 1 insertion(+)
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↑]> git diff master fix-texto
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↑]> git diff master first-script
+diff --git a/index.html b/index.html
+index 2d0f1a0..3e99bcc 100644
+--- a/index.html
++++ b/index.html
+@@ -8,6 +8,9 @@
+                <h1>Welcome</h1>
+                <h2>demo 1</h2>
+                <p>Parrafo</p>
+-               <b>Texto en negrita</b>
+        </body>
+ </html>
++
++<script>
++
++</script>
+\ No newline at end of file
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↑]> git checkout first-script
+Switched to branch 'first-script'
+C:\Users\Roberto\Documents\GitHubN\test1 [first-script]> git status
+On branch first-script
+nothing to commit, working tree clean
+C:\Users\Roberto\Documents\GitHubN\test1 [first-script]> git status
+On branch first-script
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        deleted:    test1.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        folder/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+C:\Users\Roberto\Documents\GitHubN\test1 [first-script +1 ~0 -1 !]> git add folder
+C:\Users\Roberto\Documents\GitHubN\test1 [first-script +1 ~0 -0 | +0 ~0 -1 !]> git status
+On branch first-script
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   folder/test1.txt
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        deleted:    test1.txt
+
+C:\Users\Roberto\Documents\GitHubN\test1 [first-script +1 ~0 -0 | +0 ~0 -1 !]>  git add test1.txt
+C:\Users\Roberto\Documents\GitHubN\test1 [first-script +0 ~1 -0 ~]> git status
+On branch first-script
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        renamed:    test1.txt -> folder/test1.txt
+
+C:\Users\Roberto\Documents\GitHubN\test1 [first-script +0 ~1 -0 ~]> git commit -m "folder para archivo de texto"
+[first-script 92e73e8] folder para archivo de texto
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename test1.txt => folder/test1.txt (100%)
+C:\Users\Roberto\Documents\GitHubN\test1 [first-script]> git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↑]> git merge first-script
+Removing test1.txt
+Auto-merging index.html
+Merge made by the 'recursive' strategy.
+ test1.txt => folder/test1.txt | 0
+ index.html                    | 4 ++++
+ 2 files changed, 4 insertions(+)
+ rename test1.txt => folder/test1.txt (100%)
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↑]> git status
+On branch master
+Your branch is ahead of 'origin/master' by 4 commits.
+  (use "git push" to publish your local commits)
+nothing to commit, working tree clean
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↑]> git diff
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↑]> git diff master
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↑]> git push origin master
+Counting objects: 12, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (11/11), done.
+Writing objects: 100% (12/12), 1.20 KiB | 0 bytes/s, done.
+Total 12 (delta 5), reused 0 (delta 0)
+remote: Resolving deltas: 100% (5/5), completed with 1 local objects.
+To https://github.com/Noljaron/test1.git
+   27c0a26..8fa5e0b  master -> master
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git branch
+  first-script
+  fix-texto
+* master
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git branch -d fix-texto
+Deleted branch fix-texto (was d7c7986).
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git branch -d first-script
+Deleted branch first-script (was 92e73e8).
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working tree clean
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git log --graph --decorate --oneline --all
+*   8fa5e0b (HEAD -> master, origin/master, origin/HEAD) Merge branch 'first-script'
+|\
+| * 92e73e8 folder para archivo de texto
+| * badf6f0 script
+* | d7c7986 texto en negrita
+|/
+* 27c0a26 Update index.html
+* 8225d9d nuevo file y html editado
+* 7e35fdf meta charset
+* 38ec29e new html
+* 94ad293 Initial commit
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git gc
+Counting objects: 29, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (25/25), done.
+Writing objects: 100% (29/29), done.
+Total 29 (delta 9), reused 0 (delta 0)
+C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git log
+commit 8fa5e0be8cde26dcb97f3314bdc5242a8e36d337
+Merge: d7c7986 92e73e8
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:34:38 2016 -0600
+
+    Merge branch 'first-script'
+
+commit 92e73e8b6b23238677c557cc62854ee111130e41
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:33:42 2016 -0600
+
+    folder para archivo de texto
+
+commit d7c798658cc7e0bb9c108196bcef2bafd20ad978
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:04:24 2016 -0600
+
+    texto en negrita
+
+commit badf6f043484daa94d3a2b85bae2eeb1085a8b67
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:00:54 2016 -0600
+
+    script
+
+commit 27c0a265756c932658dfb797d21327ad94b7934d
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 17:24:32 2016 -0600
+
+    Update index.html
+
+commit 8225d9d99f03641a0d56e0142d3c7049fe6f6db8
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 17:17:52 2016 -0600
+
+    nuevo file y html editado
+
+commit 7e35fdf5ce88539c31cf3e21737794c6de4ca226
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 13:02:02 2016 -0600
+
+    meta charset
+
+    Charset UTF-8
+
+commit 38ec29e4727c015480f3406b283d1b02d44647d2
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+No next tag  (press RETURN)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Date:   Tue Dec 20 12:59:01 2016 -0600
+
+    new html
+
+    demo creando nuevo html
+
+commit 94ad29352691e02a871e8e621e28f6ad6cfa82ac
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 11:38:45 2016 -0600
+
+    Initial commit
+(END)C:\Users\Roberto\Documents\GitHubN\test1 [master ≡]> git commit --amend
+[master 0a44981] Merge branch 'first-script'
+ Date: Tue Dec 20 18:34:38 2016 -0600
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↕]> git log
+commit 0a44981017fb6695244aa9561717b911134ec0d5
+Merge: d7c7986 92e73e8
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:34:38 2016 -0600
+
+    Merge branch 'first-script'
+
+    descripcion faltante
+
+commit 92e73e8b6b23238677c557cc62854ee111130e41
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:33:42 2016 -0600
+
+    folder para archivo de texto
+
+commit 8fa5e0be8cde26dcb97f3314bdc5242a8e36d337
+Merge: d7c7986 92e73e8
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:34:38 2016 -0600
+
+    Merge branch 'first-script'
+
+commit 92e73e8b6b23238677c557cc62854ee111130e41
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:33:42 2016 -0600
+
+commit d7c798658cc7e0bb9c108196bcef2bafd20ad978
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:04:24 2016 -0600
+
+    texto en negrita
+
+commit badf6f043484daa94d3a2b85bae2eeb1085a8b67
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:00:54 2016 -0600
+
+    script
+
+commit 27c0a265756c932658dfb797d21327ad94b7934d
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 17:24:32 2016 -0600
+
+    Update index.html
+
+commit 8225d9d99f03641a0d56e0142d3c7049fe6f6db8
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 17:17:52 2016 -0600
+
+    nuevo file y html editado
+
+commit 7e35fdf5ce88539c31cf3e21737794c6de4ca226
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 13:02:02 2016 -0600
+
+    meta charset
+
+    Charset UTF-8
+
+:
+:
+:
+(END)
+:
+commit 0a44981017fb6695244aa9561717b911134ec0d5
+Merge: d7c7986 92e73e8
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:34:38 2016 -0600
+
+    Merge branch 'first-script'
+
+    descripcion faltante
+
+commit 92e73e8b6b23238677c557cc62854ee111130e41
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:33:42 2016 -0600
+
+Date:   Tue Dec 20 12:59:01 2016 -0600
+:
+
+:
+    new html
+commit 38ec29e4727c015480f3406b283d1b02d44647d2
+:
+
+ ↕]> Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+    demo creando nuevo html
+:
+Date:   Tue Dec 20 12:59:01 2016 -0600
+
+:
+
+commit 94ad29352691e02a871e8e621e28f6ad6cfa82ac
+:
+    new html
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+:
+
+Date:   Tue Dec 20 11:38:45 2016 -0600
+:
+    demo creando nuevo html
+
+:
+
+    Initial commit
+(END)
+commit 94ad29352691e02a871e8e621e28f6ad6cfa82ac
+(END)
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+(END)
+Date:   Tue Dec 20 11:38:45 2016 -0600
+:
+:git log
+commit 0a44981017fb6695244aa9561717b911134ec0d5
+Merge: d7c7986 92e73e8
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:34:38 2016 -0600
+
+    Merge branch 'first-script'
+
+    descripcion faltante
+
+commit 92e73e8b6b23238677c557cc62854ee111130e41
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:33:42 2016 -0600
+
+    folder para archivo de texto
+
+commit d7c798658cc7e0bb9c108196bcef2bafd20ad978
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:04:24 2016 -0600
+
+    texto en negrita
+
+commit badf6f043484daa94d3a2b85bae2eeb1085a8b67
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 18:00:54 2016 -0600
+
+    script
+
+commit 27c0a265756c932658dfb797d21327ad94b7934d
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 17:24:32 2016 -0600
+
+    Update index.html
+
+commit 8225d9d99f03641a0d56e0142d3c7049fe6f6db8
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 17:17:52 2016 -0600
+
+    nuevo file y html editado
+
+commit 7e35fdf5ce88539c31cf3e21737794c6de4ca226
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 13:02:02 2016 -0600
+
+    meta charset
+
+    Charset UTF-8
+
+commit 38ec29e4727c015480f3406b283d1b02d44647d2
+commit 38ec29e4727c015480f3406b283d1b02d44647d2
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Author: Roberto Novoa <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 12:59:01 2016 -0600
+Date:   Tue Dec 20 12:59:01 2016 -0600
+
+
+    new html
+    new html
+
+
+    demo creando nuevo html
+    demo creando nuevo html
+
+
+commit 94ad29352691e02a871e8e621e28f6ad6cfa82ac
+commit 94ad29352691e02a871e8e621e28f6ad6cfa82ac
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+Author: Noljaron <algo_rnovoa_27@hotmail.com>
+Date:   Tue Dec 20 11:38:45 2016 -0600
+Date:   Tue Dec 20 11:38:45 2016 -0600
+
+
+    Initial commit
+    Initial commit
+(END)
+(END)PS>
+(END)PS>
+(END)PS>
+(END)PS>
+(END) [master ↕]>
+(END)>
+(END)git
+usage: git [--version] [--help] [-C <path>] [-c name=value]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+C:\Users\Roberto\Documents\GitHubN\test1 [master ↕]>

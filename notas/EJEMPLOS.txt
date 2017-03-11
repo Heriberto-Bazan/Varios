@@ -1,0 +1,15 @@
+EJEMPLO DE NAVBAR EN BOOOTSTRAP 4 
+http://www.codeply.com/go/P0G393rzfm
+
+EJEMPLO DE PROYECTO REACT-BOOTSTRAP
+https://react-bootstrap.github.io/components.html#navigation
+
+EJEMPLO DE REACT-BOOTSTRAP 
+https://auth0.com/blog/bootstrapping-a-react-project/
+
+VIDEO DE ENRUTAMIENTO
+https://www.youtube.com/watch?v=1iAG6h9ff5s
+
+EJEMPLO DE REACTROUTER
+https://css-tricks.com/learning-react-router/
+

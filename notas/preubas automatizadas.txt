@@ -1,0 +1,237 @@
+Una de las grandes ventajas del paradigma de programación funcional que maneja Redux es que es muy fácil realizar pruebas automatizadas, ya que al final del día nuestro código no son más que funciones puras.
+
+Qué son pruebas de código
+
+Una prueba es una pieza de código que ejecuta una parte del código de nuestra aplicación y valida que el resultado sea el esperado, veamos un ejemplo muy sencillo.
+
+functionsum(...numbers) {
+  return numbers.reduce(
+    (result, number) => result + number,
+  );
+};
+
+console.assert(
+	sum(1, 2, 3) === 6,
+	'it should return 6'
+);
+Como podemos ver tenemos una función sum que suma N cantidad de números y devuelve el resultado, luego hacemos una prueba ejecutando nuestra función y comprobando que el resultado sea el esperado.
+
+La función console.assert nos permite mostrar un mensaje (el segundo argumento que le pasemos) si no se cumple una condición (el primero argumento). De esta forma si sum(1, 2, 3) === 6 devuelve false entonces se va a mostrar un mensaje en la consola con el mensaje de error.
+
+Algo importante de las pruebas es que sean automatizables, en nuestro ejemplo una vez escrita la prueba podemos correr el script la cantidad de veces que queramos para comprobar que siga pasando, así podríamos automatizar la ejecución de la prueba para que se corra después de cada cambio en nuestros archivos.
+
+Qué se puede probar en Redux
+
+A todo nuestro código de Redux es posible implementarle pruebas, principalmente a nuestro reducers, que son la parte más importante al ser quienes se encargan de manejar nuestro estado.
+
+También es posible hacer pruebas de nuestros middlewares, creadores de acciones y acciones asíncronas, aunque en varios de estos es posible que necesitemos hacer un mock de ciertas funcionalidades. ¿Que significa hacer un mock? En pocas palabras es implementar una versión falsa y para pruebas de algo, por ejemplo levantar un servidor HTTP que simule ser el API que consumimos para que siempre devuelva el mismo resultado.
+
+Librerías y herramientas de pruebas
+
+Hay muchas librerías y otras herramientas que se pueden usar para hacer pruebas en aplicaciones de JavaScript.
+
+ava
+mocha
+tape
+jest
+Estas son algunas de las muchas que existen en JS. En este material vamos a usar jest como nuestra librería por lo simple de implementar y usar y porque no requiere configuración de ningún tipo.
+
+Implementando las pruebas
+
+Instalación
+
+Entonces manos a la obra, lo primero que vamos a hacer es instalar jest usando npm. Ya que las pruebas son algo que se usa durante el desarrollo entonces vamos a hacer la instalación como una dependencia de desarrollo.
+
+npm i -D jest babel-jest
+El primero es nuestra librería de pruebas y el segundo es para que use Babel para soportar ES2015, ES2016, etc.
+
+Configuración
+
+Dije que no había configuración, y es cierto, jest no requiere configuración, pero si nuestro entorno de desarrollo, así que vamos a modificar nuestro package.json para agregar un script llamado test:
+
+"test": "jest"
+Con esto vamos a poder, desde nuestra terminal, ejecutar npm run test, npm test o simplemente npm t y así ejecutar todos nuestros tests.
+
+Luego vamos a crear un archivo llamado .babelrc en la raíz del proyecto con el contenido:
+
+{
+	"env": {
+		"test": {
+			"presets": ["latest-minimal"]
+		}
+	}
+}
+Este archivo se usa para configurar Babel en el proyecto, en este caso estamos diciéndole que si el entorno donde se ejecuta Babel es test use el presetlatest-minimal. Cuando corremos jest gracias a que instalamos babel-jest este va a cargar Babel y con el entorno test, de esta forma se va a aplicar el preset latest-minimal.
+
+Este archivo afecta a todos los usos de Babel de nuestro proyecto, esto incluyo el babel-loader de Webpack, ya que por defecto Babel usa el entorno development al solo configurar test no nos va a afectar, pero se podría usar este archivo también para Webpack.
+
+Escribiendo las pruebas
+
+Ahora ya estamos listos, así que vamos a crear un archivo llamado reducer.test.js junto al archivo reducer.js y en este archivo vamos a colocar las pruebas para nuestro reducer.
+
+import reducer from'./reducer';
+import actions from'./actions';
+
+// vamos a probar la acción `SET_COMMENTS` cuando se envía al store
+test('reducer - SET_COMMENTS', () => {
+  expect(
+    reducer(
+     undefined,
+      actions.setComments([{ id: 1 }, { id: 2 }])
+    )
+  ).toMatchSnapshot();
+});
+Muy simple cierto? Lo que esta prueba va a hacer es ejecutar el reducer (le pasamos undefined como estado inicial para que use el por defecto) pasándole una acción para agregar comentarios.
+
+Al ejecutar el reducer vamos a obtener un objeto con todo el estado, luego jest va a generar un snapshot de ese estado. ¿Qué es esto? Básicamente genera un archivo llamado reducer.test.js.snap ubicado dentro de la carpeta __snapshots__ con este contenido:
+
+exports[`test reducer - SET_COMMENTS 1`] = `Object {
+  "comments": Object {
+    "1": Object {
+      "id": 1,
+    },
+    "2": Object {
+      "id": 2,
+    },
+  },
+  "posts": Object {
+    "entities": Object {},
+    "page": 1,
+  },
+  "users": Object {},
+}
+`;
+Este archivo entonces nos va a permitir comprobar el resultado de ejecutar nuestro reducer, lo más increíble de esto es que cuando volvamos a correr nuestras pruebas va a comparar el resultado con el snapshot que ya había generado y si no son iguales nos va a mostrar un error.
+
+Corriendo las pruebas
+
+Ahora vamos a correr las pruebas con el comando que definimos antes:
+
+npm test
+Si todo va bien y nuestra prueba pasó sin problemas deberíamos ver en la consola el siguiente mensaje.
+
+ PASS  source/reducer.test.js
+  ? reducer - SET_COMMENTS (6ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   1 passed, 1 total
+Time:        1.264s
+Ran all test suites.
+Manejando errores
+
+Ahora vamos a simular un error, para eso vamos a hacer que el reducer que agrega los comentarios genere un error incluyendo throw new Error('test'); al principio del reducer.
+
+Ahora cuando volvamos a correr nuestra pruebas Jest nos va a indicar que hay un error.
+
+ FAIL  source/reducer.test.js
+  ? reducer - SET_COMMENTS
+
+    test
+      
+      at commentsReducer (source/reducer.js:48:9)
+      at node_modules/redux-immutable/dist/combineReducers.js:37:39
+      at Array.forEach (native)
+      at node_modules/redux-immutable/dist/combineReducers.js:34:25
+      at Map.withMutations (node_modules/immutable/dist/immutable.js:1355:7)
+      at node_modules/redux-immutable/dist/combineReducers.js:33:27
+      at Object..test (source/reducer.test.js:11:3)
+      at process._tickCallback (internal/process/next_tick.js:103:7)
+
+  ? reducer - SET_COMMENTS (4ms)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        1.086s
+Ran all test suites.
+npm ERR! Test failed.  See above for more details.
+Como podemos ver nos muestra el mensaje de error y el stacktrace para saber exactamente donde ocurrió el error. Luego de ver el error podemos ir a esa línea para arreglarlo y correr de nuevo nuestras pruebas para ver si se corrigió el error.
+
+Vamos a causar otro tipo de error ¿Que pasaría si no ocurre un error, pero el resultado no es el esperado? Para simular esto vamos a modificar nuestra prueba para que en vez de agregar un comentario con el ID 2 use el ID 3, ya que el resultado va a ser diferente nos va a dar un mensaje de error similar a este.
+
+ FAIL  source/reducer.test.js
+  ? reducer - SET_COMMENTS
+
+    expect(value).toMatchSnapshot()
+    
+    Received value does not match stored snapshot 1.
+    
+    - Snapshot
+    + Received
+    
+    @@ -1,12 +1,12 @@
+     Object {
+       "comments": Object {
+         "1": Object {
+           "id": 1,
+         },
+    -    "2": Object {
+    -      "id": 2,
+    +    "3": Object {
+    +      "id": 3,
+         },
+       },
+       "posts": Object {
+         "entities": Object {},
+         "page": 1,
+      
+      at Object..test (source/reducer.test.js:15:3)
+      at process._tickCallback (internal/process/next_tick.js:103:7)
+
+  ? reducer - SET_COMMENTS (12ms)
+
+Snapshot Summary
+ › 1 snapshot test failed in 1 test suite. Inspect your code changes or run with `npm test -- -u` to update them.
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   1 failed, 1 total
+Time:        1.359s
+Ran all test suites.
+npm ERR! Test failed.  See above for more details.
+Esto significa que nuestra prueba falló ya que esperaba que el segundo comentarios tuviese el ID 2 y tiene el 3. Acá entonces tenemos dos opciones, o arreglamos nuestro código para que la prueba pase (en este caso como forzamos que falle desde la misma prueba nos toca arreglar esta y no nuestro código). O podemos decirle a jest que este resultado esta bien y es el esperado y que corrija el snapshot.
+
+Para esto tenemos que correr nuestras pruebas con el parámetro -u.
+
+npm t -- -u
+Usar -- nos permite agregar parámetros al comando que corremos con npm t, esto sería lo mismo que hacer jest -u. También podemos agregar otro script a nuestro package.json llamado test:fix que corra jest -u y arregle las pruebas.
+
+Una vez arreglamos nuestra prueba se va a modificar el archivo de snapshot para que tenga el nuevo resultado (con el ID 3).
+
+Correr pruebas cuando cambian archivos
+
+Hasta ahora cada vez que realizamos un cambio ya sea a nuestro código o nuestras pruebas necesitamos volver a la consola para correr npm t, esto se vuelve monótono y molesto ya que vamos a estar modificando archivos y corriendo pruebas constantemente.
+
+Para automatizar esto podemos agregar un script a en nuestro package.json que vamos a llamar test:watch y vamos a poner el siguiente comando:
+
+jest --watch
+De esta forma vamos a iniciar jest y vamos a obtener el siguiente resultado en la consola:
+
+ PASS  source/reducer.test.js
+  ? reducer - SET_COMMENTS (8ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   1 passed, 1 total
+Time:        1.321s
+Ran all test suites related to changed files.
+
+Watch Usage
+ › Press a to run all tests.
+ › Press o to only run tests related to changed files.
+ › Press p to filter by a filename regex pattern.
+ › Press q to quit watch mode.
+ › Press Enter to trigger a test run.
+Desde ahora cada vez que modifiquemos un archivo de nuestra aplicación o una prueba se van a volver a correr nuestras pruebas.
+
+Además de eso podemos ver que es posible indicarle a jest que archivos correr.
+
+Si escribimos a en la consola jest va a correr todas las pruebas en caso de un cambio de archivos.
+Si escribimos o va a correr las pruebas relacionadas a los archivos modificados.
+Si escribimos p entonces podemos pasarle una expresión regular para que solo archivos cuyo nombre pasen esa expresión se ejecuten.
+Si escribimos q dejamos de correr las pruebas, esto se puede hacer también con ctrl+c como cualquier script que corramos en consola.
+Si apretamos enter o return vamos a hacer que se vuelvan a correr las pruebas.
+Con esto ya aprendimos a usar jest para hacer pruebas automatizadas y que estas estén ejecutándose correctamente sin nuestra intervención.
+
+Les propongo entonces que bajo esta misma sistema terminen de implementar las pruebas necesarias para cada posible acción que el store espera y compartan como hicieron para realizar estas pruebas en los comentarios.

@@ -1,0 +1,91 @@
+https://www.video2brain.com/mx/cursos/react-de-0-a-100 (Manual de React)
+//http://www.enrique7mc.com/2016/04/hola-mundo-en-react-js/ (Manual de Ract)
+//https://facebook.github.io/react/docs/installation.html (Manual de React desde 0)
+//https://medium.com/react-redux/introducci%C3%B3n-a-redux-js-8bdf4fe0751e#.oq0dazv2u(Funcion store)
+//https://facebook.github.io/react/docs/events.html#form-events (Eventos en React)
+//https://platzi.com/clases/react/concepto/fundamentos2306/event-handlers-con-parametros-
+personalizados/material/ ( Event handlers con parámetros personalizados)
+
+// https://abalozz.es/comenzando-con-react/ (chat en react)
+
+//facebook.github.io/react/docs/animation.html
+
+//NOTA VERIFICAR LAS VERSIONES DE TODOS LOS PACKETES QUE INSTALLAMOS
+
+//liga de react-route: https://reacttraining.com/react-router/
+
+//que es xsc que inserte codigo 
+// que es __htma es doble score 
+
+//renderizar un String
+
+//target web y node diferencia
+
+//por que un addLocaleDate se ingresa dentro de un array
+
+//aplicaciones Fronted
+
+//para resolver algun error de consolo.error es necesario el la siguiente sintaxis dentro .eslintrc
+ "rules":{
+        "no-console":0
+    }
+
+//Que es una Key
+
+//funcion bind
+//websocket
+
+//link de react https://www.google.com.mx/#q=que+son+los+proptypes
+
+dispatch(action)
+
+*Despacha una acción. Esta es la única forma de realizar un cambio de estado.
+
+La propiedad propTypes podemos incluirla en el objeto que usamos para definir nuestro componente
+de ReactJS y nos permite establecer una serie de validaciones que se realizarán sobre las 
+propiedades recibidas por el componente en el momento de su creación.
+
+*Store
+Por último necesitamos crear nuestro Store, el store va a tener cuatro responsabilidades:
+Almacenar el estado global de la aplicación
+Dar acceso al estado mediante store.getState()
+Permitir que el estado se actualice mediante store.dispatch()
+Registrar listeners mediante store.subscribe(listener)
+
+*Una aplicación universal es aquella que comparte todo (o casi todo) su código entre el cliente
+ y el servidor. Por poner un ejemplo si tenemos una función como esta:
+
+functionsayHello() {
+	console.log('hello world');
+}
+
+*Cosas que no pueden ser universales
+
+*Hay muchas cosas que se pueden hacer en JS que no son universales. En lo navegadores por ejemplo
+existe el DOM (document, window), Geolocation, XMLHttpRequest, Fetch, notificaciones, WebWorkers,
+ServiceWorkers, etc.
+De la misma forma el servidor posee cosas como http, fs, net, etc. que no son universales ya que 
+un navegador no puede iniciar un servidor HTTP o TCP o interactuar con el sistema de archivos 
+directamente.
+
+*Un template es un conjunto de archivos que determinan la estructura y el aspecto visual de un sitio web,
+ y tiene como ventaja principal disminuir tiempos y costos de desarrollo
+
+*JSON (JavaScript Object Notation - Notación de Objetos de JavaScript) es un formato ligero
+ de intercambio de datos. Leerlo y escribirlo es simple para humanos, mientras que para las máquinas 
+es simple interpretarlo y generarlo.
+
++add-ons: También conocidos como extensiones, plugins, snap-ins, etc, son programas que sólo funcionan
+anexados a otro y que sirven para incrementar o complementar sus funcionalidades.
+Las barras de Google y Yahoo! son add-ons para navegadores de internet y tienen opciones y 
+funciones que incrementan las funciones del mismo.
+
++para intalarlo es lo siguiente npm i -S react-addons-css-transition-group
+
++para usarlo lo envolvemos en toda la lista 
++cuando utilizamos ccsmoduls siempre se cambian a hasing se cambia por un objeto
++crear componentes
+=> ejecutar un codigo 
+
++mapStateToProps
++mapDispatchToProps

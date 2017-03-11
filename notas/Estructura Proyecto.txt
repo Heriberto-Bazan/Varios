@@ -1,0 +1,70 @@
+LA ESTRUCTURA DEL PROYECTO 
+
+
++se crea un carpeta source en donde se coloca todo el codigo, el package.json es necesario
+dentro de esta carpeta creamos un archivo server.js "esto quiere indicar que "
+
++se crea una carpeta llamada webpack y dentro de esta un archivo webpack.server.com
++se crea una carpeta built con otra dentro llamada server
+
++se crea webpack.config.js carga la configuracion del servidor
+
+//creamos nuestras rutas 
++se crea una carpeta llamada pages dentro desta otra que se llame containers y un archivo que 
+se llame Page.jsx aqui se configura las rutas y que hay que hacer en cada ruta 
+
+//crear el cliente 
+
++se crea en sorce un api.js
+
+
+
++creamos una carpeta en donde va a contener todo el codigo, la carpeta de SOURCE 
+en donde va ir todo el codigo del proyecto,
+vamos a crear un archivo que se llama server.js a donde va a ir todo el html 
+
++creamos una carpeta llamada WEBPACK, la cual tendra un JS. llamado webpack.server.config.js
+
++creamos una carpeta llamada built/server 
+
++creamos otro archivo dentro de webpack, con nombre webpack.config.js
+
+//manejo de rutas 
++en source creamos una carpeta llamada pages dentro de esta creamos otra carpeta que se llama containers que va 
+hacer el entrpoint de cada ruta ejemplo "https://platzi.com/#/clases/"
+
++creamos en el source por que es generico tanto para el servidor para el cliente 
+
++creamos en el sorce dentro de pages creamos components un archivo de nombre Layaout.jsx
+
++mapear en React
+
++que es PropTypes
+
++lo primero que tenemos que hacer en nuestro proyecto es configurar nuestros dos archivos 
+con los plugins de ccs 
+
++creamos un nuevo .css dentro de components
+
++para cambiar  "build": "set NODE_ENV=production  && webpack -p",
+ 
++jsonplaceholder.typicode.com/photos?_pages=1
+
+////////////////
+
++para iniciar un proyecto npm init --yes eso genera json
++npm i -g webpack
+
++ son la librerias npm i react react-dom
+
++node /servidor.js
+
++intalamos webpack
+npm i -D webpack 
+
++intalamos los present y plugins apara web pack
+npm i -D babel-core babel-loader  babel-preset-latest-minimal babel-preset-react json-loader
+
++iniciamos el servidor node built/server/index.js
+
++rutas con react router lo instalamos npm i -S react-router@next

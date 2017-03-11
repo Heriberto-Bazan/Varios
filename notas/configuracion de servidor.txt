@@ -1,0 +1,47 @@
+import http from 'http';
+import React from 'react';
+import { renderToString } from 'react-dom/server'
+import { ServerRouter, createServerRenderContext } from 'react-router'
+
+//importamos la carpeta de las rutas
+import Pages from './pages/containers/Page.jsx'
+
+function requestHandler(request, response){
+  const context = createServerRenderContext()
+  let html = renderToString(
+    <ServerRouter location={request.url} context={context}>
+      <Pages />
+    </ServerRouter>
+  )
+
+//con esto le indicamos al navegador que es html y muestre el string con html
+  const result = context.getResult();
+
+  response.setHeader('Content-Type', 'text/html');
+
+//si hay un redireccionamiento correcto se ejecuta
+  if (result.redirect) {
+    response.writeHead(301, {
+      Location: result.redirect.pathname,
+    });
+  }
+
+//si no hay redireccionamiento correcto manda un error
+  if (result.missed) {
+    response.writeHead(404);
+
+//tenemos que volver a pasarlo para que lo renderize por que la primera ves no lo realizo
+    html = renderToString(
+      <ServerRouter location={request.url} context={context}>
+        <Pages />
+      </ServerRouter>
+    );
+  }
+
+  response.write(html);
+  response.end();
+}
+
+const server = http.createServer(requestHandler);
+
+server.listen(3000);

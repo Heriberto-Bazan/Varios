@@ -1,0 +1,176 @@
+https://github.com/react-bootstrap/react-bootstrap
+
+https://github.com/react-bootstrap/react-bootstrap/tree/master/docs/examples
+//VIDEO 23 BOOTSTRAP 
+
++que es bootstrap
+Bootstrap es un framework desarrollado y liberado por Twitter que tiene como objetivo facilitar 
+el diseño web. Permite crear de forma sencilla webs de diseño adaptable, es decir, 
+que se ajusten a cualquier dispositivo y tamaño de pantalla y siempre se vean igual de bien
+
++Para instalar Bootstrap 4 junto a laravel y sass.
+
++npm install bootstrap@4.0.0-alpha.4
++luego actualizar los archivos app.scss de resources por:
+
+@import "variables"
+@import "node_modules/bootstrap/scss/bootstrap-flex"
+
++presenta un sistema de grillas son columnas
+
+//VIDEO 25 CONTENEDORES EN BOOTSTRAP
+
++un contenedor es undiv que se adapta a distintos tamaños 
++los break point es el ancho de pixeles que tiene el dispositivos
+
+- Extra Small: < 544px 
+
+- Small: 544px - 768px
+
+- Medium: 768px - 992px
+
+- Large: 992px - 1200px
+
+- Extra Large: > 1200px
+
++Veamos los componentes de Bootstrap,
+Bootstrap soporta 5 tamaños extrasmall, small, medium, large, extra large
+.container, crea un contenedor con padding.
+.container-fluid, crea un contenedor que ocupa todo el ancho disponible
+
++existen dos tipos de contenedores
+
+#header-container (siempre esta alineado con el container)
+
+#header-container .container-fluid (se ocupa para toda la pantalla)
+
+//VIDEO 26 GRILLAS EN BOOTSTRAP
++tenemos row y column los row van dentro de los contenedores columns que van dentro de las row
+
+
++El push sirve para mover una columna hacia delante y el pull sirve para mover la columna hacia atras.
+Por eso Al aplicar el push la columna con el texto Hola se mueve 6 posiciones hacia adelante y 
+la columna que contiene el texto Mundo se mueve hacia atras 6 posiciones, el numero puede variar 
+dependiendo de cuantas columnas quiereas mover
+
++Recuerda:
+.row, se crea una fila dentro de un container,
+Para definir el tamaño de la columna, usas .col-[medida]-[cantidad columnas]
+Ejemplos:
+col-xs-12
+col-md-6
+col-xl-1
+Sacha Lifszyc
+
++tamaños xs, sm, md, lg, xl
+
+push y pull 
+
+//VIDEO 27 GRILLAS FLEX CON BOOTSTRAP
++Sistema de grilla construido con Flexbox
+
++Flexbox nos va permitir alinear nuestro orizontal como verticalmente nuestro espacio que esta
+disponibleentre ellos
+Recuerda:
+Si usas este sistema de grillas, no podremos soportar navegadores antiguos.
+
++las filas como maximo tienes 12 columnas 
+
++row es para toda la columna y cuando solo queremos alinear una sola columna y no toda la fila 
+
++&laquo; para crear flecha de navegacion 
+fle-xs-middle
++clase para aliniar el texto text-xs-right
++flex-items-xs-lefth
++flex-items-xs-rigth
++flex-items-xs-around es el espacio que tiene a los costados igualmente 
++flex-items-xs-middle los elementos de la fila estran alineados al centro
++flex-items-xs-between para repartir los espacio
+
+//VIDEO 27 BARRA DE NAVEGACION CON BOOTSTRAP
++Vamos a ver como construir un menú de navegación con Bootstrap
+
++navbar es la clase que utiliza bootstrap para la barra de navegacion 
+
+//VIDEO 29 NAVEGACION RESPONSIVE CON BOOTSTRAP
++agragamos la libreria http://fontawesome.io/
+
++nota hay que agregarla directa de la url
++boostrap nos da una clases para oculptar elementos que es "hidden"
++   <!--creamos un span para qeu solo muestre la palabra buscar apartir de medianos -->
+  <span class="hidden-sm-down">Buscar</span>
+                    
+  <!--crea una lupe hidden es para ocultar la lupa despues de mediana-->
+ 
+  <i class="fa fa-search hidden-md-up"></i>
+
++creacion de menu hamburguesa
+data-togle="collapse" indica cuando se va a colapsar
+data-target="#navMenu le indica a cul elemento debe de despeglar o la cciones que deseamos realizar
+&#9776; este carcter es que indica las tres reyas en el menu hamburguesa
+
+hidden-xs-down: no muestra cuando es extrasmoll
+text-uppercase: las transforma en mayuscula
+font-weight-bold : las tranforma a negritas
+pull-sm-right: lo tira a la derecha
+
+
++<!-- implementamos el menu hamburguesa data-togle="collapse" para mostrar el menu-->
++<button class="navbar-toggler hidden-sm-up" data-toggle="collapse" data-target="#navMenu">
+
++tenemos que duplicar el buscador ya que para dispisitivos pequeños tenemos que tener 
+otra barra de buscador 
+
+//VIDEO 30 CAROUSEL CON BOOTSTRAP
+
++auto; es para los costados
++margin es para superior e inferior
+
+//VIDEO 31 IMAGENES RESPONSIVAS CON BOOTSTRAP
++clase img-fluid "class="img-fluid" sirve para que se adapte a el ancho que tenga disponible
+en la columna
+
+//VIDEO 32 FORMULARIOS CON BOBTSTRAP
++en bootstrap tenemos clases de ccs que podemos ir colocando para mostrar diferentes tipos de errores
++class="form-control" 
++form-text
++text-muted
+
+//VIDEO 33 MODALS EN BOOTSTRAP
+Modals en Bootstrap
+Veamos como crear modales con Bootstrap.
+
++modal funcionan de la siguente manera en un div que contenga todo
++data-dismiss="modal" para crear un botton de cierre
+
+<div class="modal fade" id="modalOferta">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  
+<h4 class="modal-title">
+  
+<div class="modal-body">
+
+//VIDEO 34 Breadcrumbs con Bootstrap
++Veamos como crear un historial de navegación con Breadcrumbs
+
+//VIDEO 35 FILTROS CON BOOTSTRAP
++Veamos como crear filtros de nuestra listas de productos.
+
++listado de elementos 
+
+//VIDEO CARDS CON BOOTSTRAP
++Veamos como construir cards con Bootstrap.
++class="card" 
++class="card-img-top" "img-fluid"
+
+//VIDEO 43 Zurb Development Stack
+
+//VIDEO 44 YEOMAN
++para instalarlo es el siguiente comando npm install -g yo
++se crea una carpeta con mkdir ejemplo
++cd ejemplo 
++ yo
+
+++font awesome y actions son librerias para iconos flechas 

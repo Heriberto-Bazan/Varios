@@ -1,0 +1,509 @@
+https://medium.com/@jbscript/using-bootstrap-4-from-source-with-react-and-nwb-f26caf395952#.1rz06tron
+http://git.miguelnieva.com/#/268
+mesnaje de llave 
+SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8
+
+git config --global alias.splog 
+log --graph --abbrev-commit --decorate --date=relative 
+--format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) 
+%C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all	
+
+git config --global alias.superlog "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"	
+		
+				GITHUB
+
+//2. COMANDOS
+- git add
+Mueve todos los cambios del “Working Directory” al “Staging Area”.
+
+- git branch
+Este comando es tu administrador general de ramas.
+Te permite crear diferentes ramas de desarrollo, dentro de un repositorio particular.
+El comando a utilizar es:
+1. git branch [nombre de la rama a crear]2. * git checkout [nombre de la rama a crear].
+* Recuerda que una vez creada, debes cambiarte hacia ella.
+Si quieres crear la rama y cambiarte automáticamente, puedes usar:
+git checkout -b [nombre de la rama a crear]
+
+- git checkout
+En adición a poder moverte entre commits y viejos archivos para revisión, 
+git checkout también te permite navegar entre las diferentes ramas existentes.
+Combinado con los otros comandos básicos de GIT, es una forma de trabajar una particular
+línea de desarrollo.
+
+git checkout [rama]git checkout [Commit ID]
+- git clean
+
+- git clone
+Crea una copia de un repositorio existente de GIT.
+Clonar es el camino más común para que los desarrolladores obtengan una copia del proyecto,
+del repositorio central. Regularmente va hacia local
+git clone [dirección del repositorio, puede ser https;//…git, ó, ssh:...]
+
+- git commit
+Inserta el conjunto de archivos que se encuentra en el "Staging Area” y los colocan en el repositorio.
+Cada “set” de archivos insertados en la historia del proyecto se la llama “commit”.
+Combinado con git add, ese define el proceso básico de GIT.
+git commit -m [nombre del título del commit]
+
+- git commit -- amend
+Incluir --amend corrige el más reciente commit.
+Este es muy útil cuando olvidas preparar un archivo en el Staging Area y es importante
+ tenerlo en el  commit.  
+git commit --amend 
+
+- git config
+Configura todas las opciones que puedes hacer con GIT.
+
+- git fetch
+Te permite descargar una rama de otro repositorio, con todos sus commits y archivos.
+  Pero, no busca integrar nada en tu repositorio local.
+Esto da la oportunidad de inspeccionar cambios antes de fusionarlos con tu proyecto.
+
+- git init
+Inicia un nuevo repositorio de Git. Esto permite que Git empiece a rastrear
+al repositorio con todos los cambios que hagas dentro.
+Es lo primero que tienes que hacer antes de empezar a trabajar.
+Te sitúas en la carpeta de trabajo que vas a utilizar Git y ejecutas:
+git init
+
+- git log
+Te ayuda a explorar las previas revisiones de un proyecto.
+rovee diferentes opciones de formato para mostrar commits.
+git log [parámetros]
+ 
+
+- git merge
+Fusión. Integra cambios de diferentes ramas independientes, en una sola.
+git checkout [la rama base que quieres que sea “el que absorbe"]git merge
+ [la otra rama que quieres "que sea absorbida"]
+
+- git pull
+Es la versión automática de git fetch. Descarga la rama desde un repositorio remoto y luego
+, inmediatamente lo fusiona con la rama actual.
+git fetch + git merge = git pull
+
+- git push
+“Pushing” es el opuesto a “fetching”.
+Te permite mover una rama local a otro repositorio, que usualmente es la forma de publicar
+contribuciones, en un servidor remoto.
+Se pueden enviar muchos commits al mismo tiempo, no sólo uno.
+git push [nombre del remoto] [nombre de la rama]
+
+- git rebase
+Te permite mover tus ramas hacia adelante, en lugar de fusionarlas. Esto ayuda a que no hagas
+fusiones innecesarias.
+Cuando necesitas una rama más completa y detallada, entonces se utiliza rebase para lograrlo.
+Por ejemplo, en este caso, la rama “feature”, en lugar de fusionar, colocaremos toda la rama
+completa enfrente de maste
+
+- git reflog
+
+- git remote
+Es un comando que te permite conectar un repositorio locales y remotos.
+Un administrador de conexiones, en definición sencilla.
+En lugar de poner constantemente la URL para realizar los comandos 
+de “fetch”, “pull”, y “push”, sólo le asignamos un nombre y podemos llamar 
+esa conexión de manera rápida.
+git remote add [“nombre del remoto"]* Por defecto, se llama “origin
+
+- git reset
+Deshace cambios a archivos en el “Working Directory”.
+Hacer un reset te permite limpiar ó completamente eliminar cambios que no han sido
+publicados al repositorio público.
+
+- git revert
+Deshace un commit, colocando uno extra adelante de la rama, quitando los cambios del commit elegido.  
+
+- git status
+Muestra el estado del “Working Directory” y cada commit subido al repositorio. 
+
+1. Development (Desarrollo)
+Servidor de desarrollo en local. Regularmente es tu máquina, corriendo el proyecto, en el cual 
+puedes ejecutarlo y desplegarlo en tu navegador.
+
+2. - Production (Producción)
+Se refiere al servidor donde corre el proyecto "en línea”, donde los usuarios pueden interactuar
+con él.
+
+3. Testing
+Son exámenes que se ejecutan sobre un proyecto con la finalidad de encontrar fallos en el código.
+Puede suceder en un “Central Repository” como GitHub ó integrado con el servidor de producción,
+ antes de entrar plenamente a esta última área.
+
+				CURSO PROFESIONAL DE GIT Y GITHUB
+
+//VIDEO 4
+
++git --version ::para verificar el tipo de version 
++$git config --global user.name "Miguel Nieva" 
++$git config --global user.email "m@platzi.com"
++git config --list
++git config --global color.ui true
+
++que es el rootmap
+nos permite saber a donde vamos 
+
+//VIDEO 5 INTRODUCCION A LOS SISTEMAS DE CONTROL DE VERSIONES 
+
++se encarga de guardar los cambios que se van realizando 
+
+//VIDEO 6 INTRODUCCION A GIT
+
++git es la herramienta para gestinar proyectos
++git es distribuido y significa que son independientes 
+
+//VIDEO 8 ARQUITECTURA DE ARBOL
++arquitectura de arboles son 3 areas, la primera y la segunda area es donde trabajamos, la primera
+area se le llama workin directory es donde nosotros editamos nuestro proyecto, la segunda area 
+se le llama Staging Area o area de prepaparacion para que lo manden al repositorio final
+
++workin directory
++Staging Area
++repositorio 
+
+//VIDEO 9 INSTALACION 
+
++git --version ::para verificar el tipo de version 
++$git config --global user.name "Miguel Nieva" 
++$git config --global user.email "m@platzi.com"
++git config --list
++git config --global color.ui true
+
+//VIDEO 10 GIT WORKFLOW
+
+Working Directory
++git init                                    	--iniciar un proyecto
++git status 
+
+Staging Area
++git add "file or directory"
++git add -A
++git commit -m "mensaje de lo que signica el commit"
++git status --en que punto te encuentras
++git init -m "nombre del archivo"		--iniciar un repositorio
++git add  					--para agregar un solo archivo
+**checas el estatus de que ya agrego un archivo -- git status
++git add -A					--para agregar todos los archivos 
+
+
++git commit -m "Creacion de proyecto"		--para hacer un commit
++git add index.html				--para agregar los cambios
++git log					--es uncomando que te indica donde estuviste modificando
++git log --online
++git log --oneline --graph
+
+
+
+//VIDEO 11 GIT RESET
+**precaucion con estos comandos regresar a un estado anterior es el que tu quieras 
++git reset --hard "punto del commit"
+este funciona cuando el Staging Area, Working Directory, y Repository se alinean 
+
+**este comando de git reset --hard puedes navegar en versiones
+
+git reset hard (id_commit) es el comando para borrar commits y tambien para restaura el ultimo 
+commit borrado.
+
+git reset mix se borra es staging area y el repositorio....no se mete con el working area
+(sublime text o cualquier otro editor).
+
+git reset soft se borra el commit y no el staging area y el working area....los archivos 
+quedan cargados para hacer un nuevo commit en el staging area.
+
+git checkout id_commit se utiliza para regresar en el tiempo a un punto determinado del proyecto.
+
+//VIDEO 12 ANALIZANDO UN COMMIT
+
+**que tiene un commit esta formado por cuatro datos el primero 
+
+Parent N/A (se refiere al cmbio de version anterio )
+
+author (nombre del autor)
+
+Date  (fecha en que se crea)
+ 
+Commit ID SHA (nombre del id se basa en el algoritmo del sha es muy dificil que se repita alguno) 
+
+//VIDEO 13 LA IMPORTACIA DE PROPONER (FUSIONES Y RAMAS)
+
+**Las pricipales funciones de las Ramas es para generar ideas, para ejecutar features y para 
+arreglar Bug Fixes
+
+*la rama siempre se llamara ("master")
+**Como funcionas las ramas iniciamos con un commit
+*para generar una rama es: get checkout - b "experimental"  Y get checkout - b "master"
+
+//VIDEO 15 FUSIONES EN GIT
+
+*la fusion es el cambio de ambas ramas DY 
++Fast-Forward ayuda a fusionar distintos tipos de archivos
++Manual Merge se utiliza para saber que tipo de codigo es mejor cuando dos personas en la rama 
+modifican el mismo archivo
+
++¿Qué es una fusión?
+Una fusión es una mezcla de ambas ramas (master y experimental)
+¿Cómo hacer fusiones?
+Primero hay que situarse en la rama master(git checkout master) y luego hacer la fusión con
+ git merge experimental
+¿Cómo se resuelven los conflictos?
+-Fast forward: Los gestores trabajaron archivos diferentes al repositorio.
+-Manual merge: Dos desarrolladores trabajan el mismo archivo en la fusión y las mismas líneas de 
+código.
+¿Qué es el rebase?
+Es una técnica que nos permite situar los commits de la rama experimental delante de los commits
+ de la rama master. Al hacer esto head queda posicionado sobre el último commit de la rama 
+experimental, por lo tanto hay que hacer un git checkout master para volver al último commit de la
+ rama master y luego un git merge experimental para adelantar la rama master a la rama experimental
+ e igualarla. De esa manera podemos comenzar a trabajar con la rama master, en vez de trabajar con
+ la rama experimental.
+
+*rebase se encarga de fusionas las ramas experimentales en el rama master 
+
+//VIDEO 16 PROYECTO CON LINEAS DE TIEMPO ALTERNAS  
+Para crear un alias
+!!git config --global alias.superlog "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"	
+
+*iniciamos el proyecto con git init
+*agregamos los archivos con git add -A
+*agregamos el nombre del commit con git commit -m "nombre del comit "
+*creamos varios archivo y los agregamos con git add -A y les inidcamos un comit con git commit -m "nombre"
+
+*para crear una rama hay dos formas es para crear un atajo git checkout -b experimental 
+Y git branch "nombre de la rama"
+
+*para fusionar la rama creada git merge experimental 
+son dos tipos de acciones fastforward es para combinar distintos archivos y 
+manual merge: cuando tienen las misma lineas de codigo
+
+*para borrar una rama con el siguente comando "nota la rama no se puede borar solo cuando hay alguna fusion"
+git branch -b experimental
+
+*lo primero que hacemos cuando utilizar cuando tenemos dos archivos que se modificaron en 
+la misma linea de comando es borrar la linea que queremos 
+para hacer cambios en una fusion 
+
+git add -A
+git status
+git commit -m "nombre que indicamos"
+
+*para reiniciar todo git
+rm -rf .git
+
+*para cambiar el commit, se utiliza el sigueinte comando "solo aplica para el ultimo commit que realizamos"  
+git commit -am "cambio de nombre" --amend
+
+*comando rebase para ejecutarlo nos situamos en la ramma creada 
+git checkout ramarebase	--para cambiar a la rama creada
+git rebase master 	--para fucionas las dos ramas y que quede delante de master 
+git checkout master 	--para cambiar a master 
+git merge ramarebase 	--para fucionar 
+git fastforward         --
+
+
+
+//VIDEO 17 HEAD POINTER + GIT LOG
+
+*Head pointer es un puntero en donde se encuentra exactamente el commit
+
++hay mucho atajos para commit uno de ellos es el siguiente 
+git commit -am "Cambio de Inglés a Español"
+
++para cambiar el ultimo commit es 
+ammed:lo que hace rectificar sustitur el ultimo commit
++por que solo se puede cambiar el ultimo commit: por que los commit van en cadenas y el ultimo
+commit no tiene hijos 
+git commit -m "Modificamos correctamente la fecha "  --amend
+
+**comandos git log son 
+git log --oneline
+tit log --decorate
+git log -stat
+git shortlog
+git log --graph --online --decorate
+git log --preetty=format:"%cn hizo un commit %h el dia %cd"
+git log -2
+git log --before="today"                                      --comit por dia especifico
+git log --autor="nombre del autor"			      --por nombre del autor 
+git log --grep="ingles " -i				      -- por palabra
+git log --index.html					      -- por tipo de archivo
+git log -S""						      --por contenido		
+
+//VIDEO 18 WORFLOWS
+
++que son workflows:todo lo madamos a github y todos los usariso descargan de github 
+
++que es GitHub:es servicio de "hosting" de repositorios, atraves de una intefas grafica
+
++github funciona en 2 bases exploracio y clonacion:cuando se habla de exploracion se habla de clonar
+pero nuca es la intension colaborar solo se descarga y se estudia la estructura
+
++se descarga con clone git clone 
++esquema a nivel github exploracion se trabaja en local Repository y Remote Repository,
+local repository significa que tenemos un repository en nuestro computadora, remote repository
+esta un servidor 
+
++para clonar un proyecto 
+git clone "la url que se copia de la sitio web"
+
+**Colaboraciones con workflows
++creamos un usuario
++creamos un repositorio
++conectamos con llave SSH a GitHub, desde tu área local
+
+**generar una repositorio personal 
+
++hacen un espejeo con push y vamos avanzando tanto local con en la web 
++creamos una llave publica y privada
+ssh-keygen -t  rsa -b 4096 -C "heriberto_bazan@hotmail.com"
+
+ssh-keygen: Generador de ssh keys
+-t rsa: Transforma la key con el algoritmo de rsa (podria ser sha, etc. Github propone rsa)
+-b 4096: Github propone este numero de bits para nuestras keys
+-C "email aqui": 
+ssh-keygen -t rsa -b 4096 -C "poner aquí correo electrónico"
+
+***Subir archivos a nuestro repositorio personal
+**para agregar un archivo al repositorio
+agregamos loa archivos con 
+git init
+git add -A
+git commit -m ""
+git remote add origin "nombre de nuestro repositorio"
+git push origin master 
+
+**cuando no nos respoende con los comandos mecionados lo hacemos con hhtp ("para resolver el problema 
+en el sigueinte link")
+
+ https://github.com/Heriberto-Bazan/Ejemplos.git
+https://github.com/Heriberto-Bazan/Ejemplos.git
+
+git push origin master 
+
+**con eso tenemos que refrescar la pagian de github
+*para cambiar de ssh a http se utiliza el siguiente comando 
+git remote set-url origin
+
+//VIDEO 19 REPOSITORIOS PERSONALES 
+
+++se le cambia el CAT por TYPE en windows 
+
+*cuando creamos un nuevo archivo solo empuja el archivo ejemplo "cuando se crea un nuevo archivo"
+
+git status 
+git add -A
+git commit -m "Se creo el archivo hola mundo"
+git push origin master ("origin siempre se pone por defecto que es el nombre que lleva por default")
+
+**cuandose manda push tiene que tener un orden para no tener conflicos al momento de actualizar
++cuando se descarga algun proyecto se descargan dos archivos que es master y origin/master, 
+origin/master es una rama escondida que refleja la rama, es una copia identica de master
+de github  
+
+**iniciar un repositorio con Readme esto sirve 
+-settings origin
+-collaborators
+agregamos los usuarios
+
+**para descargar es soloca en la origin/master que es la carpeta escondida o rama escondida 
+git fetch origin master
+
+**para jalarlo a master se hace una fusion 
+*fastforward adelanta y pega todos los cambian existentes 
+git merge origin/master 
+
+-para hacer push o empujar los archivos despues de descargar los cambios
+git push origin master 
+
+//VIDEO 20 REPOSITORIOS REMOTOS (forked)git 
+
+se crea un espejo del repositorio original 
+
+c) Proyectos de terceros. (Repositorios “forked”) 
+c) Proyectos de terceros. (Repositorios “forked”) 
+c) Proyectos de terceros. (Repositorios “forked”) 
+Proceso de repositorios “Forked" 
+- Actualizarnos siempre con el repositorio principal, antes de comenzar. 
+- Desarrollar y, antes de subir a nuestro repositorio “forked”, revisar nuevamente cambios. 
+- Subir a nuestro repositorio “forked” todo lo que hemos hecho. 
+- Ejecutar un “Pull Request"
+
+Crear ó entrar a la carpeta del proyecto
+$ git remote add origin [HTTPS ó SSH del proyecto forked]
+$ git remote add upstream [HTTPS ó SSH del proyecto principal]
+$ git fetch upstream
+$ git merge origin/upstream
+$ git fetch origin
+$ git merge origin/master
+Hacer cambios en local
+$ git fetch upstream
+$ git merge origin/upstream
+$ git push origin master
+
++para repositorios de terceros 
+
+-creamos un carpeta con el nombre "impresionante" despues 
+-inicamos git con "git init"
+-conectamos el repositorio con la replica con "git remote add origin "la url que nos arroja nuestro usuario de git" "
+-para checar los archivos es con "git remote -v"
+-conectamos el repositorio orinial 'upstream es la rama que nos conecta a la rama original'
+"git remote add upstream "la url de donde "la url del repositorio original "
+
+con las instrucciones mencionadas conectamos los dos repositorios 
+
+-antes que nada tenemos que checar si hay algun cambio u alguien no a creado algun nuevo archivo 
+-para los cambios es:
+git fetch origin
+-para las fusionarlo es: 
+git merge origin/master
+-para descargar los archivos de las dos rmas escondidas
+git fetch upstream
+-para fusionar las dos ramas y descragra los cambios 
+git merge upstream/master 
+
+-creamos archivo propuesta
+COPY ADD touch mexico.txt
+git add -A
+git commit -m "Propuesta Mexico"
+git push origin master 
+-con esto se suben los archivos creados en el clon
+
+-para agregar propuestas a terceros (PULL REQUEST) nos vamos a git 
+apartado que indica en new pull request
+agrgamos los archivos 
+creamos el pull request
+creamos comentarios 
+
+//VIDEO 21 GESTION DE PROYECTOS EN GIT:¿COMO HACERLO?
+	
+*La gestión de un proyecto se divide en tres áreas:
+-Local repository: Es el área donde se desarrolla y modifica el código en busca de reparar bugs
+o realizar features, involucra las computadoras y repositorios locales del líder del equipo y 
+el resto de los desarrolladores.
+-Central repository (github): Es donde el líder del equipo debate, acepta o rechaza los cambios
+que le envían el resto de los desarrolladores mediante los pull request.
+-Remote repository (en este caso, Amazon webservices): Este lugar es donde se hace el despliegue
+ del proyecto hacia los usuarios finales, se recomienda no enviar los cambios directamente desde
+ el local repository, en su lugar debe hacerse desde el Central repository.
+
++se maneja como filtro flujo de trabajo en git 
++la suma de git merge + git fetch = git pull
+
++pull request son permisos que acepta el lider 
+
+//VIDEO 22 ADMINISTRACION DE UN PROYECTO EN GITHUB
+
++se crea una nueva organización la cual ingresaremos los usuario que van a integrarse
+ en este proyecto
+
+//ViDEO 23 USANDO Issues y Milestonesde Github
+-Issues son todos los problemas o detalles que se tienen que arreglar del proyecto y se vinculan
+con dos cosas con Labels y Milestones
+-las Labels son etiquetas 
+-Milestones es el inicio de un bugs y el termino de este ("son las partes en que se divide el proyecto
+y se le asignan la tarea a los distintos miembros de proyecto")
+
+-wiki: se utiliza pra enteder como se fue desarrolonado el proyecto 
+
+//VIDEO 24 COMO MANEJAR UN PULL REQUEST 
+

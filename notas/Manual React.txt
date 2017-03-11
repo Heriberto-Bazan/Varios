@@ -1,0 +1,1242 @@
+http://www.aprendiendoando.com/curso-de-reactjs-clase-4-estados
+https://auth0.com/blog/bootstrapping-a-react-project/
+https://egghead.io/lessons/react-bootstrap-a-react-application-through-the-cli-with-create-react-app
+https://medium.com/@jbscript/using-bootstrap-4-from-source-with-react-and-nwb-f26caf395952#.kb1wop30d
+https://github.com/insin/bootstrap-4-nwb
+https://reactstrap.github.io/
+
+
+//VIDEO 2 ¿QUE ES REACT?
+
++React es una librería creada por Facebook, para crear las UI de las aplicaciones web basadas en 
+ componentes.
++Características
+*Los datos fluyen en un sentido desde el primer al último componente
+*Usa un algoritmo para detectar cambios y solo aplicar esas modificaciones a la UI
+*se implemnta el VIRTUALDOM
+*Utiliza JS para crear componentes pero para facilitar esto extendieron el lenguaje creando JSX
+*Permite generar cualquier tipo de UI como web, mobile, canvas, televisores, terminales, etc.
+*Propone usar programación funcional y manejar estructuras de datos inmutables.
+*react usa solo Javascript para crear componentes, para facilitar esto crearon JSX, una extesion 
+de javascript que permite utilizar XML(HTML) dentro de nuestro codigo
+
++sitio oficial de react https://facebook.github.io/react/
+
+//VIDEO 3 HOLA MUNDO CON React
+
+*CDN, es un servidor donde podemos almacenar archivos que se replicaran al rededor del 
+mundo para que sea rápida la carga.
+*Es importante agregar dos librerías, React y React DOM
+*React permite crear componentes y React DOM permite usar componentes en una aplicación web.
+*Los props son los datos que le pasamos al componente al momento de inicializarlo.
+
+<script>
+function Hola(props){
+
+}
+</script>
+
++return React.DOM.h1({  --esto crea un elemento del DOM
+ id: 'Title',		--se crear un id Tile
+}, ´Hola ${name}´);	--va a crear hola espacio y lo que tenga name 
+}
+
+const hola = React.createElement(Hola, {
+ name: 'Ricardo',
+});
++para instaciar un elemnto se utiliza una funcion llamada createElement
+
++creamos ReactDom.render() tiene una funcion llamada render() esto nos ayuda a pasarle
+el elemnto que creamos con createElement
+
++setTimeout nos ayuda a que despues de un segundo el texto cambie
+
+ setTimeout(
+      () => {
+        ReactDOM.render(
+          React.createElement(Hola, { name: 'Platzi!' }),
+          document.getElementById('app')
+        );
+      },
+      1000
+    );
+
++document.getElementById
+
++data-reactroot: con esto sabe react que se incia un aplicacion con react
+
++se empiza a implementar la sintaxis emca2016 es la nueva version de java
+script y es complatible con todos los navegadores 
+
+//VIDEO 4 ¿QUE ES EL VIRTUAL DOM Y COMO FINCIONA?
+
++El virtual DOM es una representación de todos los objetos que componen la UI 
+usando un objeto de JS.
++Todos los componentes creados por React deben comenzar con mayúscula.
++El algoritmo de React permite que se hagan cambios de manera efectiva en el DOM.
+
++Todos los componentes creados con React tienen la primera letra en mayuscula
++Todos los elementos nativos de HTML en minusculas 
+
++algoritmo de las diferencias esto quiere decir que calcula lo que hay ahora y lo que 
+va a venir de nuevo 
++otra cacarateristica son la propiedades de un nodo, si cambia los datos del nodo lo modifica y asi
+si se va en el arbol
+
++los compenetes tienes un metodo para saber si tienes que actulizarse o no
+
++tenemos otro componente que se llama la lista de nodos, nos indican un ejemplo con una lista en 
+donde se crea un nuevo <li>nuevo</li> con esto tenemos que hacer dos transformaciones añadir un
+nuevo <li></li> y la otra es agregar el texto. para evitar eso utilizamos KEY son unicos en la lista
+y esto quiere decir que solo se le va a insertar un nuevo <li></li>
+
++esto nos ayuda a cambiar solo los elemntos necesarios y no cambia todo el html nos da un gran 
+rendimiento 
+
+//VIDEO 5 QUE ES JSX
+
+*ejemplos de jsx 
++" React.createElement(Hola, { name: 'Platzi!' })," --con react
++" <Hola name="Platzi!" />, " --con JSX
+
++para utilizar JSX tenemos que instalar babel
+
++Para usar Babel desde el navegador, necesitas agregar un script, con la librería de 
+babel-standalone y el tag donde escribimos el código debe ser tipo text/babel
+
+//VIDEO 6 CREACION DE COMPONENTES 
+
++Debemos pensar nuestra aplicación como un conjunto de componentes, que siguen la filosofía 
+de separación de responsabilidades esto quiere decir que vamos a divir nuestra aplicacion 
+en distintas partes, se separan dependiendo de que hace cada componente. los componetes son el <div>
+<header>, <footer>, nboton like, cuadro de texto de comentarios, etc.
++En los componentes de react, todo es JS
++Para crear un componente podemos:
+Crear un componente puro con una función
+Usar class y extender desde React.Component
+Usar class y extender desde React.PureComponent
+Usar React.createClass()
+
++distintas formas de crear un componente en REACT
+
++la principal diferencia de crear una funcion pura y crear una clase, es que tenemos acceso a mas 
+funcionalidades de react, como por ejemplo el estado 
++para crear un componente es class MiComponente extends React.Component{}, el metodo render 
+es obligatorio hechos con clases 
+
++cuando usamos clases los props acceden directamente de .this
++cuando usamos un metodo constructor(props) es obligatoria colocarle super(props)
+
+class MiComponente extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          count: 0,
+        };
+
++la funcion del metodo setState gracias a que extendemos nuestros componentes, nos ayuda a saber
+el estado de un componente o una key 
+
++siempre que se haga un bind lo aremos en el constructor
+
++PureComponent
+
++la funcion createClass, sustituye a la contructor y se coloca getInitialState y hace bind automaticamente
+
+const OtroComponent = React.createClass({
+      getInitialState() {
+        return {
+          count: 0,
+        };
+      },
+
+NOTA: ESTE METODO SE VA A DESCARTAR 
+
+//VIDEO 7 COMPONENTES PUROS VS DE ESTADO 
+
++El dividir los componentes con estados y componentes solo de UI, nos permite facilitar 
+el volver a usar componentes en partes de la aplicación.
+
++los componentes puros van se crean en una funcion pura ejemplo:
+estos componentes crean aparte de UI(Diseño de intefaz de usuario)
+function Hola(props) {
+      const name = props.name;
+
+      return (
+        <h1 id="Title">
+          Hola {name}
+        </h1>
+      );
+    }
++los otros tipos de componentes se les nombre de ESTADO por ejemplo:
+
+class MiComponente extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          count: 0,
+        };
+
+        this.handleClick = this.handleClick.bind(this);
+      }
++otra de las caracteristicas de los componentes es poder reutilizarlos en otra parte 
+
++el funcion handleClick sirve para, cuando el usuario le de un click aumente otro mismo
+
++un conteneder tiene logica no UI ejemplo 
+
+ function Hola(props) {
+      return (
+        <h1 id="Title" onClick={props.onClick}>
+          Hola {props.name} {props.count}
+        </h1>
+      );
+    }
+
+render() {
+        return (
+          <Hola
+            name={this.props.name}
+            count={this.state.count}
+            onClick={this.handleClick}
+          />
+        );
+      }
+    }
+
+
+//VIDEO 8 CICLO DE VIDA DE UN COMPONENTE 
+
++Todos los componentes tienen momento,desde que se crean, se actualizan, y se eliminan
+
++Montado:
+Constructor()  definir estado ejmplo:
+ class MiComponente extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          count: 0,
+        };
+
+
+conponentWillMount()  Aún no esta el DOM, no se deben hacer peticiones sincronas:
+manda el mensaje con console.los que el componente se va a montar 
+
+	componentWillMount(){
+	console.log('el componente se va a montar');
+	}
+
+
+render() En este momento de la fase de montado se van a tomar las propiedades, 
+el estado y el contexto y se va a generar la UI inicial de este componente. 
+Esta función debe ser pura (no puede tener efectos secundarios) y no debe modificar nunca 
+el estado del componente.
+
+Actualizar el estado en este punto puede causar un ciclo infinito de 
+renderizados ya que cada cambio al estado genera que el componente se renderice de nuevo
+(y vuelva a cambiar el estado).
+
+componentDidMount  Después que la aplicación se monta:
+ya que el componente se monto manda un evento con la funcion click para que cuando le den 
+click en cual cualquier parte de pagina este aumente uno
+	componentdidMount(){
+	document.addEventListener('click', this.handleClick);
+	}
+
++Actualización:
+componentWillReceiveProps(nextProps) podmeos validas los estado de los props pero antes 
+que el compnente actualize
+este metodo recibe todos cambios que realizan los componentes 
+        
+	 componentWillReciiveProps(nextProps){
+	this.setSatet{}
+		count: this.state.count * 2,
+		});
+		}
+
+shouldComponentUpdate(nextProps, nextState)  prueba si es necesario actualizar o no, el componente
+siempre devuelve true,solo cuando nosotros creamos un componente con pureComponets prgunta si 
+algun componente cambio se devuelve falso
+
+	shouldComponentUpdate(nextProps, nextState){
+	if (nextState.count !== this.state.count) return true;
+	return false;
+	}		
+
+componentWillUpdate(nextProps, nextState)  el componente sera montado
+
+	componentWillUpdate(){
+	console.log('el componente se va a actualizar');
+	}
+
++render()  Al igual que en el montado acá se va a generar la UI, esta vez con los datos 
+que hayan cambiado. Como antes este método debe ser puro.
+
+componenteDidUpdate(prevProps, prevstate)  podemos volver a asignar algo
+
+	componentDidUpdate(){
+	console.log('el componente se actulizo');
+	}
+	
++Desmontado:
+componentWillUnmount()  Limpiar eventos o eliminar algunas cosas NOS PERMITE HACER ALGO ANTES 
+DE MONTARLO 
+
+	componentWillUnmount(){
+	document.removeEventListener('click', this.handleClick);
+	}
+
+(bind: devuelve una nueva funcion cada ves que se quita )	
+
++si el nombre del componente de nombre se cambiaran simplemente no se actualizaria, pero como
+utilizamos shouldComponentUpdate
+
+//VIDEO 10 MANEJO DE EVENTOS EN DOM
+
++Además de tener los eventos nativos del DOM, React cuenta con una forma de manejar eventos,
+estos tienen atributos similares o algunos adicionales.
+
++la propiedad target te permite saber cual es evento del dom que siparo el evento,como ejemplo 
+tenemos el <h1> con target sabemos que <h1> lo disparo y si es distinto simplemento no realiza nada
+
+	function Hola(props){
+	return (
+	<h1 id="Title" Onclick={props.onClick} onMouseEnter={props.onMouseEnter}>
+	Hola {props.name} {props.count}
+	</h1>
+	);
+	}
+
+	handleMouseEnter(event){
+	console.log(event.target);
+	}
+
+	return ()
+	<Hola
+	onMouseEnter={this.handleMouseEnter} 
+	/>
+	;
+
+//VIDEO 11 Event handlers con parámetros personalizados
+
+//VIDEO 12 CONTEXTO DE LA APLICACION 
+
++El contexto es una funcionalidad experimental.
++Manejar datos globales es una mala practica.
+
++para no utilizar variables globales utilizamos contexto, los contexto nos permite definir datos 
+que van a estar accesibles en toos los componentes de la aplicacion ejemplo de como crearlos:
+	
+	function Hola(props, context)
+	<h1 id="Title" onClick={props.onClick} onMouseEnter={props.onMouse}>
+	Hola {props.name} {context.count}
+	</h1>
+
+	Hola.contexType = {
+	 count: React.PropTypes.number  --con esto obtenemos acceso al contexto
+	};
+	
+	getClildContext(){
+	return {
+	 count: this.state.count,
+	};
+	}
+
+	MiComponent.childContextTypes = { --se define una propiedad estatica utilizando childContextTypes 
+	 count: React.PropTypes.number,	  esto es un objeto que se tiene que definisr el tipo de dato 
+	}				  que se va a mandar en el contexto
+
++definir PropTypes nos permite indicarle a React esto es un numero y si no es numero o es otro tipo
+de dato react nos avisa con un warning que este tipo de dato esta mal 
+
++nos indica en ejemplo en donde existe componente a,b,c en el cual 'a' maneje el estado y maneje el
+contexto 'c' que lea el dato del contexto 'b' no tiene que saber que existe
+
++hay que tener en cuenta que el contexto es una funcion experimental de react, se utiliza mucho en 
+librerias se recomienda su uso en librerias ya que al ser una libreria, si la sintaxis cambia solo
+tenemos que actualizar la libreria, pero so lo hacemos en nuestro codigo tendriamos que cambiar todo
+
+//VIDEO 13 COMPONENTES DE ALTO ORDEN (HOC) y Mixins
+
++Los mixins o componentes de alto orden nos permite reutilizar funcionalidad entre varios componentes.
+
+Recuerda:
+...props permite pasar los props del componente.
+
++los componentes de lato orden se utilizan mas en librerias como redux
+
++se crea una funcion que lleva WrappedComponent 
+
++{...this.props} estos ... cada propiedad de props se lo pasa a WrappedComponent
+
+  function Counter(WrappedComponent) {           --para crea una componente DE alto orden 
+      class CounterHOC extends React.Component { --retornamos un nuevo componente
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            count: 0,
+          };
+
+          this.handleClick = this.handleClick.bind(this); 
+        }
+
+getChildContext() {
+          return {
+            count: this.state.count,
+          };
+        }
+
+ CounterHOC.childContextTypes = {
+        count: React.PropTypes.number,
+      };
+
+      return CounterHOC;
+    }
+
+handleClick() {
+          this.setState({
+            count: this.state.count + 1,
+          });
+        }
+
+        render() {
+          return (
+            <WrappedComponent
+              onClick={this.handleClick}
+              {...this.props}
+            />
+          )
+        }
+      }
+
+CounterHOC.childContextTypes = {
+        count: React.PropTypes.number,
+      };
+
+      return CounterHOC;
+    }
+
+
+const HolaHOC = Counter(Hola);
+
++HOC componente de alto orden 
+
++los  Mixins su funcionalidad es la misma, pero hay que tomar en cuenta que
+ solo funcionan con componentes creados con createClass
+
++un mixins es un objeto con propiedades ejemplo:
+
+const mixin = {
+      handleClick() {
+        console.log('clickeado'); --creamos en mixin
+      },
+    };
+
+const Componente = React.createClass({ --solo soporta createClass para mixins
+      mixins: [
+        mixin,
+      ],
+      render() {
+        return <div onClick={this.handleClick}>hola</div>; --ejecutamos la funcion onClick
+      }
+    })
+ReactDOM.render(
+      <Componente />,
+      document.getElementById('app')                --renderizamos el componente
+    );
+
+NOTA:LOS MIXINS SE ESTAN DEJANDO DE UTILIZAR
+
+// VIDEO 15 Instalación de Node.js y usando npm
+
+*PARA UTILIZAR 
+
+react que es una libreria de javascript que la utiliza facebook 
+
+*INSTALACION DE Node.js Y  USANDO npm
+
+-node.js: es lo que nos permite utlizar javascript fuera del navegador, esto nos permite 
+utilizar modulos 
+
+-para installar npm es installa npm i -D
+-Para verificar que tienes instalado node, usa node -v
+-Para verificar que tienes instalado npm, usa npm -v
+-npm es el gestor de paquetes de modulos node y de javascript
++veniamos utilizando un CDN pero es mas viable utilizar npm 
+-Para installar Ract intiliza, npm i -S react 
+-Para iniciar un proyecto, usa npm init --yes con esto nos crea un archivo llamado package.json
+(LA LETRA "S" SE UTILIZA PARA QUE EL PAQUETE SE GUARDE EN package.json)
+lo va instalar y lo agrega a package.json 
+-asi se installan depéndecias  
+
+
+-Con npm gestionamos paquetes de JavaScript
+-Node nos permite escribir JS por fuera del navegador.
+-La versión LTS es la versión de soporte amplio
+
+// VIDEO 16 Estructura de archivos
+
+*¿Cómo organizar los archivos en un proyecto?
+
+-File-Type First (FTF), donde colocamos todos los archivos de un mismo tipo en una carpeta.
++esta forma la utiliza Ruby
++esta forma se organiza por tipo de archivo
++esto es bueno para aplicacion pequeñas
++con aplicacion mas grandes no es recomndable utilizar esta forma 
+
+VENTAJAS
++facil de organizar
++no hay duda de donde colocar archivos
+
+-Feature First (Pods), donde colocamos cada feature en una carpeta.
++consiste en separar por caracteristicas d ela aplicacion
++es independiente de framework puede tener varios framework
++puede hacer code-splitting esto consiste en separar nuestro 
+codigo en distintos puntos de la aplicacion para que se pueda cargar azincronamente 
+
+-Apps of Apps, creamos una carpeta por cada aplicación
++se genera solo una carpeta raiz
++se puede utilizar las otras dos de organizar los archivos
++es facil cargar aplicacion de forma individual 
++cada aplicacion puede tener su propio framework o libreria 
+
++codesplitng separar la plicacion 
+
+// VIDEO 17 Iniciar un servidor de render básico - Render en Server
+
++como iniciar un servidor de Render Basico
++se intala npm i -S react react-dom
+
++enderToString, renderiza la aplicación a un string con el HTML
++Node aun no soporta nativamente la sintaxis de modulos de ES2015
+
+*Que segnifica ¿ { renderToString } from ‘react-dom/server’; ?
+
++import http from 'http'; es un modulo nativo de node.js para crear servidores
++renderToString este metodo renderiza la aplicacion en html
+
++Así eso, react-dom/server exporta un objeto con varios métodos, al usar import { renderToString }
+from 'react-dom/server'; podemos importar solo renderToString, 
+si no tendríamos que usar import ReactDOMServer from 'react-dom/server'; 
+y luego ReactDOMServer.renderToString.
+
++el objeto request muestra toda la informacion de la peticion de usuario 
++el objeto response indica la forma que la que las formas de enviar al informacion al usuarios 
+ejemplo:
+
+import http from 'http';
+import React from 'react';
+import { renderToString } from 'react-dom/server'
+
+//sirve para manejar peticiones http
+function requestHandler(request, response){
+//crea el html
+  const html = renderToString(
+//como no tiene props se le indica null
+    React.DOM.h1(null, 'hola')
+  );
+//escribe el html
+  response.write(html);
+  response.end();
+}
+//inicializamos el servidor
+const server = http.createServer(requestHandler);
+//que escuche el puerto 3000
+server.listen(3000);
+
+
+
+// VIDEO 18 MODULE BUNDLERS EN JAVASCRIPT
+
++Un modulo bundler es un software que toma nuestro código escrito en módulos
+y lo empaquetan en un único archivo.
+
+*Requiere 
++utiliza AMD (Asynchronous module definition)
++carga los modulos de forma asincrona,le mandamos un modulos inicial, 
+y despues carga los modulos con forme los requiere
++no empaqueta el codigo lo deja dividido en multiples archivos y los carga de forma asincrona
++trabaja en forma asincrona
+
+*browserify
++utiliza CommmonJS sistema nativo de Node.js
++simplemente es un peticion a un archivo 
++genera un archivo final
++como es un solo archivo es mas facil comprimir el codigo
++la diferencia del REQUIERE que el BROWSERIFY solo genara un archivo 
++como es un solo archivo es mas facil comprimir el codigo para que se tarde menos 
+
+*webpack
+
++utiliza CommonJS y AMD
++permite usar todos modulos de npm
++permite carga asincrona
++permite multiples funciones
+(HMR, DLL, Hashing, servidores estaticos)
+
+lenguaje de backen
+
+// VIDEO 19 CONFIGURAR WEBPACK PARA EL SERVIDOR RENDER
+
++¿QUE ES WEBPACK?
+Webpack es un sistema de bundling para preparar el desarrollo de una aplicación web para producción.
+ .Este comando lo que hace es leer tu fichero index.js que sería el principal de tu aplicación e 
+importar todos los módulos que estén definidos y crear el fichero de "producción" app.js en la 
+carpeta build
+
++Webpack trabaja con loaders, que ejecutan determinadas acciones dependiendo del tipo del archivo,
+en este video veremos como configurarlo para nuestro proyecto.
+
++para installar webpack, utiliza npm i -D webpack 
+(la letra "D" se refiere a que solo el desarrollador la utilizara y no lo vamos a utilizar en produccion)
++los modulos nos permiten hacer cosas 
++los loaders formas que webpack puede procesa estos archivos  
++el jsx?$ (el signo de interrogacion se refiere a que puede ser opcional la x) 
+
+++babel es una herramienta que toma codigo que no soporta y transformarlo en algo que si soporta 
+("a esto se le llama TRANSPILARLO")
++algunos eejmplos de estas librerias como babel, es brocoli, browserity, duo, brunch, etc
++exclude "node_mudulos" esto quiere decir que escluya los mudulos que instalamos con npm 
+cuando utilizamos babel para que no se tarde mucho en "TRANSPIRARLO"
++los presets en babel son plugins ejemplos stage-0, stage-1, eny, lastest, etc.
+
+++la razon por crear webpack.config.js en WEBPACK busca por default webpack.config.js 
++estas son las librerias que se instalan en este proyecto que que son las que se requierem
+--npm i -D babel-core babel-loader  babel-preset-latest-minimal babel-preset-react json-loader
+
+++ data-reactid: es cuando hacemos render en el navegador es para que este mismo que esta 
+hecha por react, es ves de borrar el html pasado solo lo combine 
+++ data-react-checksum sirve para validar que este bien renderizado y que sea el mismo 
+
+// VIDEO 20 MANEJO DE RUTAS EN EL SERVIDOR CON React Roter
+
+*Manejar las rutas con React Router para instalarlas solo en servidor 
+
++Instala la librería con npm i -S react-router@next
++Para usarlo debes usar los componentes:
+-Match, para decirle que hacer cuando encuentre la ruta
+-Miss, para decirle que hacer cuando no encuentre la ruta
+-Link, para moverse entre rutas
+ Ejemplo:
+
+import React from 'react';
+import {
+  Match,
+  Miss,
+  Link,
+} from 'react-router';
+
+import Home from './Home.jsx';
+import About from './About.jsx';
+import Error404 from './Error404.jsx';
+
+
+function Pages() {
+  return (
+    <main role="application">
+      <Match
+        pattern="/"
+        exactly
+        component={Home}
+      />
+      <Match
+        pattern="/about"
+        exactly
+        component={About}
+      />
+      <Miss component={Error404}
+      />
+    </main>
+  )
+}
+
+export default Pages;
+
+webpack -w ejecuta el comando y deja escuchando los cambios.
+
++@next installa la utlima version del router
++el exactly quiere decir que tiene que ser la ruta exacta que le colocamos 
++cuando queremos pasar el valor de un componente
+ solo se indica "exactly" el nombre sin pasar 
+true o false, y cuando pasamos
+ un valor que no sea un string  lo colocamos entre llaves "{Home}"
+
++BrowserRouter se utiliza en el cliente en un navegar en la url para cambiar de ruta cambia de url
+y saber en que ruta esta
+
++HashRouter tambien utiliza la url del navegador cuando tienes un index estatica pero utiliza un hasType
+
++MemoruyRouter no hay forma de llegar una ruta especifica siempre recargas a  home por que la ruta
+se gurada en memoria 
+
++ServerRouter nos permite crear rutas en el servidor y se utiliza createServerRenderContext();
+este se utiliza para 
+Ejemplo:
+
+import { ServerRouter, createServerRenderContext } from 'react-router'
+
+
+function requestHandler(request, response){
+  const context = createServerRenderContext()
+  
+	let html = renderToString(
+<ServerRouter location={request.url} context={context}>
+     
+ 	<Pages />
+   
+  	</ServerRouter>
+  )
+
+  const result = context.getResult();
+
+  response.setHeader('Content-Type', 'text/html');
+
+ 
+	 if (result.redirect) {
+ 
+	esponse.writeHead(301, {
+
+	Location: result.redirect.pathname,
+});
+
+  }
+
++se cambia un  const por un let esto es para que sea una variable
+
+
++el objeto getResult este comando esperamos un resultado 
+
++response.setHeader sirve para especificar que es texto html 
++respomse.end()
++response.writeHead(404)
+
++webpack -w es para que se quede escuchando cambios
+
+//VIDDEO 21 CREAR CLIENTE PARA CONSUMIR EL API 
++crear el cliente en nuestra aplicacion para consumir en API con libreria JSONPlaceholder
+
++Para instalarla ejecutamos npm i -S isomorphic-fetch
++esta libreria nos sirve para utiizar peticiones http viene a sustituirla htttprequest
++async nos permite hacer consas asicronas 
+
++Vamos a crear nuestra API para consumir los datos, para esto usamos una librería que nos permite
+usar fetch en el navegador y en node
+
++async nos ayuda a pedir funciones azincronas y viene 2016 con promesas 
++promesas acciones a realizar  
++funciones es getSingle, getComment
+
++API JSONPlaceholder este es api de prueba para demos, prototipos es de Rest
+
++este tipo de aplicacion nos sirve para consumir datos y nos ahorramos tiempo en hacer a mano todas 
+las URL
++para que nos sirve crear una api cuan
+
+EJEMPLO:
+import fetch from 'isomorphic-fetch';
+
+const baseUrl= 'https://jsonplaceholder.typicode.com';
+
+const api = {
+  posts: {
+    async getList(page = 1) {
+      const response = await fetch(`${baseUrl}/posts?_page=${page}`);
+      const data = await response.json();
+      return data;
+    },
+    async getSingle(id=1) {
+      const response = await fetch (`${baseUrl}/posts/${id}`);
+      const data = await response.json();
+      return data;
+    },
+    async getComments(id=1) {
+      const response = await fetch(`${baseUrl}/post/${id}/comments`);
+      const data = await response.json();
+      return data;
+      },
+    },
+    users: {
+      async getSingle(id=1) {
+        const response = await fetch(`${baseUrl}/users/${id}`);
+        const data = await response.json();
+        return data;
+    },
+  },
+};
+
+export default api;
+
+//VIDEO 22 INICIAR LA APP EN EL NAVEGADOR Y CONFIGURACION WEBPACK PARA LA PRODUCCION 
+
++vamos a crear el punto de entrada del codigo del navegador y compilarlo con webpack
+
++Vamos a crear nuestro archivo cliente para la aplicación.
++el <BrowserRouter></BrowserRouter> localion ni contexto ya lo tiene el navegador 
+
++Debemos instalar nuestro plugin para manear componentes 
+npm install --save-dev babel-plugin-transform-es2015-modules-commonjs
+
++en ract debemos poner las propiedades son en "camellcase charSet"
+-es un metodo muy peligroso en este caso se utiliza por que tenemos control sobre el server
+dangerouslySetInnetHTML={{
+__html: props.content,
+}}
+
++ renderizar un String renderToStaticMarkup quitando el data-id data-idroot
+
++presets y pligungs son los que instalaremos para modulos es lo que no soportan por le momento
++Vamos a crear nuestro archivo cliente para la aplicación.
++Debemos instalar nuestro plugin para manear componentes 
+npm install --save-dev babel-plugin-transform-es2015-modules-commonjs
+
+++  plugins: ['transform-es2015-modules-commonjs'] esto transforma todos nuestros import en modulos, 
+sirve para que todo se combierta en modulos  
+
+//VIDEO 23 INICIAR UN SERVIDOR DE ESTATICOS CON zeit-list
++para instalarlo es npm i -D list
+
++es un solo comando que tenemos que correr en unas sola carpeta y esto nos genera un servidos con 
+archivos estaticos 
+
+*Iniciar un servidor de estáticos con zeit/list
+
++para probar el list se utiliza la siguente sintaxis
+list ./built/statics
+
++para cambiar de puerto se utiliza la siguiente sintaxis
+list ./built/statics --port 3001 --cache 0
+
+npm run bff
+npm run sfs
+--sfs: servidor de archivos estaticos
+--bff: servidor de render
+
+++list hace poco ha cambiado de nombre, ahora esta librería se llama serve, para instalarlo 
+ejecuta sudo npm i -g serve
+
+**node ./built/server/index.js
+
+*API JSON que son los
+
+*que es el Promise
+
+COMANDO PARA INSTALAR LIST
+npm i -D list (si no realiza la instalacion correcta con D utilzar g)
+
+++++++++++http://www.w3big.com/es/react/react-component-api.html
+
++en package json hay un apartado script en donde vamos a colocar nuestros servidores
+estaticos 
+
++aunque este fallando javascript es servidor render sigue con su proceso normal, esa es una
+ las ventajas del servidor Render 
+
+
+//VIDEO 24 HERRAMIENTAS DE DESARROLLO React
+
++React devtools nos permite inspeccionar los componentes desde el navegador, 
+esto nos da la posibilidad de depurar el código y encontrar posibles errores.
+
+//VIDEO 25 CONSUMIR EL API Y MOSTRARLOS EN LA home 
+
++con el api.js que creamos
+
++podemos utilizar await para esperar la promesa 
+
++creamos el compenente componentDidMoutn()
+
++se importa Reacya que nos va a pedir el ReactDocument y si no tenemos la libreria importada nos
+causara conflicto 
+
++promise.all nos permite correr varias promesas al mismo tiempo cuando todas se completan
+nos devuelven un solo dato 
+
++target="blank" para que habra una pestaña aparte 
++rel="nofollow" los buscadores no sigues este link 
++la diferencia de colocar la etiqueta <link> y <a href=>, cuando se le indique 
+<a href=> en react-route es que es una url extrena, no se cambia la ruta,
+ y cuando se le indica un <link> es que es un url de ract-route
+
+//VIDEO 26 PERFIL DE USUARIO 
+
++Vamos a crear la página para el perfil del usuario y cargando los posts que el ha escrito.
+
++con el params trae el id del cual el usuario hacemos referencia 
+
+//VIDEO 27 ESTADO DE CARGADO Y DETALLE DE POST
+
++utilizaremos Loading el cual es un estado en donde se encuentra cargando algun jsx
+
+//VIDEO 28 PAGINACION DE POST MEDIANTE SCROLL INFINITO 
++paginacion infinita 
+
++Scroll infinito al cargar los posts, utilizaremos un handleScroll, maneja el scrooll de usuario
+y nos permite realizar casas a base de este scroll
+
++se agrega un metodo llamado handleScroll(), sirve para realizar escroll infinito
+
+//VIDEO 30 ESTELIZAR COMPONENTES CON CSS MODULES
+
++CSS Modules es separar nuestros css en pequeños archivos con nombres de clases genericos, 
+compilador Webpack va a tomar genera un hash va a cambiar de nombre y lo remplazara para
+que no pisesn los estilos 
+
++ccs-loader: para poder leer ccs 
++style-loader: sirve para leer estilos 
++extract-text-webpack-plugin:nos permite extraer ccs que genere webpack en archivo ccs externo  
+ 
++para agregar con lista de componentes npm i -D css-loader style-loader extract-text-webpack-plugin
++la configuracion tambien se configura ya que se va a encontrar con los componentes de React 
+y estos tambien tienes estilos 
+
+//solo para este plugins la ccs? es parecido a un query en donde indica que trae a todos los 
+loaders
+
+
++para extrer los plugins se utiliza ".extract" 
+
++para ejecutar los cambios hay que reinicar el servidor render
+-con el has es imposible que dos estilos se repitan
+
++para colocar estilos en react lo realizamos con:
+
+	<link 
+	rel="stylesheet"
+ 	href="link de estilos"
+	/>
+
+ render() {
+    return(
+      <article id={`post-${this.props.id}`} className={styles.post}>
+        <h2 className={styles.title}>
+          <Link to={`/posts/${this.props.id}`} >
+            {this.props.title}
+          </Link>
+        </h2>
+        <p className={styles.body}>
+          {this.props.body}
+        </p>
+        {this.props.loading && (
+          <div className={styles.meta}>
+            <Link to={`/user/${this.state.user.id}`} className={styles.user}>
+              {this.state.user.name}
+            </Link>
+            <span className={styles.comments}>
+              hay {this.state.comments.length} comentarios
+            </span>
+          </div>
+        )}
+      </article>
+    )
+  }
+}
+
++el hash se genera en base al contenido y con este no se permite duplicar un estilo
+
+//VIDEO 31 Linter y buenas prácticas con ESLint
+
+*Linter nos ayuda a mejorar nuestro codigo y asegurar tener buenas practicas 
+*Un Linter es una herramienta que lee nuestro código y nos arroja sugerencias
+de acuerdo a ciertas reglas.
++uno de los Linter mas comunes es standar.js es bueno para librerias open surce y 
+para proyectos pequeños y pocas reglas 
+*Starded corre a ESLint podemos configurar nuestras reglas   
+
++Primero instalar el linter con npm i -D eslint
++Instalamos las reglas para el linter con npm i -D eslint-config-airbnb
+(esta necesita 3 plugins que se mencionan a continuacion)
++Instalamos las librerías necesarias con npm i -D eslint-plugin-import@^2.1.0 eslint-plugin-react@^6.6.0 eslint-plugin-jsx-a11y@^2.2.3
++otro libreria para intalar es npm i -D babel-eslint
+(esta installacion nos permite que babel entienda eslint)
++Instalamos soporte para ES2015 en el linter
++npm i -D babel-eslint
++npm i -D eslint-loader
++Instalar en atom linter-eslint con apm install linter-eslint 
++haver pruebas con distintos plugins
+
+//VIDEO 32 INTERNACIONALIZACION CON REACT Intl
+
++React Intl nos permite manejar multiples idiomas en una aplicación, para instalarlo ejecutamos 
+npm i -S react-intl, es creada por yahoo 
+
++IntlProvider es un componente que podemos envolver toda nuestra aplicacion, 
+nos permite de forma global setiar todas las traducciones 
+
++addLocaleData la forma en agregar los "Locale" los Locale es la forma de agregar meses, fechas, 
+horas, traducciones, etc.
+
++
+
+//VIDEO 33 DEPLOY A PRODUCCION 
+
++para installar utilizamos el comando npm i -g now
++ el plugins DedupePlugins  sirve para que nose vayan a duplicar 
++ el plugins UglifyJsPligin sirve para compactar el codigo  
++mangle sirve para modificar nombres a la variables y unificar 
++procces.env esta variable nos ayuda a quitar muchas cosas en producción
++NODE_ENV quiere decir que es igual a produccion 
+
++publicPath se utiliza para importar cosas asincronas 
++new webpack.optimize.OccurrenceOrderPlugin(true) ayuda a ordenar los archivos 
+los mas pedidos los acomoda hasta arriba los menos importantes hasta el final
+
++los plugins ['transform-regenerator', 'transform-runtime'], nos ayudan a trabajar sin ningun 
+problema con async y otras funcionalidades 
+
++instalamos los plugins de babel
+npm i -D babel-plugin-transform-regenerator babel-plugin-transform-runtime babel-preset-es2015
+npm i -S babel-runtime
+
++crear cuenta para hacer deploy 
+
++quitar todo los modulos es otra de la caracteristicas 
+
++metodo redux nos permite convertir un array en otro objeto
++node 6 no puede tener una coma al final de los parametros de una funcion
+
++if (process.env.NODE_ENV === 'production' esto quiere decir si se encuentra en produccion 
+y al agregargar -p automaticamente se indica que esta en produccion "set NODE_ENV=production  && webpack -p"
++npm run build
+
++hay distintos plugins como ejemplo esta remove-console y remove-debugger
+
++otra caracaterista es constants element y su funcion es que si no tiene datos dinamicos 
+
++para correr el npm run build se le agrega a start
+
++npm run deploy es lo mismo que npm node ./built/server/index.js esto sirve para general un deploy
+now nos arroja una url automaticamente  al clipbord(portapapeles)
+
++ahora el diploy de los archivos estaticas now ./built/statics/ es lo mismo npm run deploy:sfs
+esto tambien nos arroja una url
+
++para cambiarle los has utilizamos una funcionalida llamada now alias 
+para cambiarle seria now alias "nombre que arroja" y enseguida el nombre con el que queremos cambiar
+
++para correr webpack es npm run build
+
++con prop.damian la url llegara dinamica 
+const domain = process.env.NODE_ENV === 'production'
+  ? 'https://platzi-react-sfs.now.sh'
+  :
+'http://localhost:3001'; 
+
++https://platzi-react-bff.now.sh
++https://platzi-react-sfs.now.sh/ (servidor estatico)
+
+//VIDEO 34 PATRONES DE ARQUITECTURA PARA APLICACIONES Fronten (REDUX)
+
++que es redux
++modelo Model-View-Collection (MVC) se implementa en bagbon 
++modelo Model-View-ViewModel (MVVM)
++FLUX 
+*que es flux: el usuario tiene una vista y cuando genera una accion la misma genera un cambio 
+
++modelo Model-View-Update propone redux
+
+//VIDEO 35 Implementación inicial con Redux para los posts
+
++para installar redux npm i -S redux redux-dom
+
++es una API
+
++los reducer son los que se encargan de actualizar el estado actual de la aplicacion
+en base a las acciones que realizan 
++la funcion reducer devuelve el estado nuevo o actual en la que se encuentra la aplicacion  
++en "reducer.js" primero se define el estado inicial 
++javascript tiene acción se define como un objeto que se llama action, este tiene 
+una propiedad que se llama payload, la cual se encarga de recolectar la informacion que necesitamos 
+para realizar la accion.  por lo regular se utiliza un "switch" ejemplo de reducer:
++para agregar un post es Object.assing
+
+const initialState = {
+  posts: {
+    page: 1,
+    entities: [],
+  };
+  comments: [],
+  user: {},
+};
+
+const action = {
+  type: 'SET_POST',
+  payload: {},
+}
+
+function reducer(state = initialState action = {}){
+  switch (action.type) {
+    case 'SET_POST':
+      return Objetc.assign({}, state, {
+        posts: Objetc.assign({}, state.posts, {
+          entities: state.posts.entities.concat(action.payload),
+        }),
+      });
+    default:
+      return state;
+  }
+}
+
+export default reducer;
+
+
+
++las arquitectura de redux es primeramente generara acciones(actions) segundo son generar reductore
+(reducer) los cuales ee encargan de actualizar el estado de aplicacion por ultimo creamos los almacenamiento
+(store) 
+
++store.dispatch nos permite enviar una accion al store 
++store.getState nos devuelve el estado actual 
++los store puede recibir 
+
++pasar datos manualmente es bueno cuando bienen del servidor y los queremos crear un store en el servidor
+
++instalamos otra dependecia que se llama reactredux npm i -S react-redux
+esta nos ayuda a conectar ract y redux en un mismo proyecto 
++los que utilizamos mucho en redux en crear funciones para crear acciones 
+
++despues installamos otra dependecias que es de npm i -S react-redux
++conect es un componente de alto orden o decorador que su significado esto 
+quiere decir que una funcion recibe componentes 
+
++la funcion mapStateToProps nos permite datos del estado actual y nos permite inyectar
+como props a otro componente 
++la funcion mapDispatchToProps recibe la funcion dispatch y los props nos permite realizar una 
+accion que no permite devolver el dispach automatica  
+ 
+
+//VIDEO 36 USO DE middlewares
+
++enhansel son funciones que ayudan a redux para mejora sus funcionalidades 
++middlewares uno de los enhansel ("applyMiddleware")
++la funcion creamos nuestro middlewares propio con, 
+logger esto devuelve es estado en que se encuentra y lo mostramos 
+
++los middlewares pueden ser asincronos
+
++revisar la pagina para checar todos los middlewares que hay
+https://github.com/PlatziDev/redux-catch
+
++para utilizar uno middlewares es logger-redux
+npm i -S redux-logger 
+
++no es bueno dejarlo en produccion por que el usuario puede ver todo el proceso 
+
+//VIDEO 38 ACCIONES ASINCRONAS
++middlewares para acciones asincronas 
++que son las acciones asíncronas
+
++para realizar estas acciones asincronas tenemos que utilizar redux-thunk
++para installarlo es lo siguente npm i -S redux-thunk 
++las acciones asincronas creadas con redux-thunk, son funciones que hacen algo 
+y reciben la funcion dispach y getSatet
+
++creamos varias acciones setComments y setUser
+
++ejemplo para creara una funcion asincrona function postNextPage()
+
+function postsNextPage(){                  ----creamos la funcion 
+    return async (dispatch ,getState) => { ----como la regla lo indica solo regresa funciones 
+    const state = getState();		   ----nos indica el estado actual
+    const currentPage = state.posts.page;  ----el estado actual de la pagina 
+
+ const posts = await api.posts.getList(currentPage); ---obtenemos los post
+
+    dispatch(setPost(posts));              ----con esto despachamos la funcion 
+
+return posts;                              ----retornamos los post    
+
+}
+}
+
++vamos a utilizar una funcion de redux llamada bindActionCreators, la cual nos facilita
+trabajas con creadores de accciones, para utilizarlo creamos un objeto llamado actions la cual hace referencia
+a las funciones asincronas y automaticamente va aser un dispach
+
+//VIDEO 37 ACCIONES ASINCRONAS CON REDUX-THUNK
+
++redux-thunk las aciones creadas con redux-thunk son funciones que hacen algo y son despachadas con
+gesState y Dispach
+
++bindActionCreators nos facilita trabajas con creadores de acciones en nuestro componente 
+
+//VIDEO 38 DIVIDIR EL REDUCER EN FUNCIONES MAS PEQUEÑAS Y COMBINARLAS 
+
++por que vamos a dividir el reducer por que tendriamos muchas funciones y esto es mas 
+complejo de leer, y dividirlo en pequeñas funciones nos facilitaria 
+
+function posptPagereducer(state = initialState.posts.page, action ={}){ --se inicia la funcion para dividir
+switch (action.type) {							--inicia tipo de accion 
+case: SET_POST:								--de tipo set post
+return state + 1;							--y al estado se le suma 1
+default:
+return state;								--si no regresa nada retorna el estado  en el que se encuentra
+}
+}
+
++para combinar nuestras funciones  se utiliza combineReducers
+const postsReducer = combineReducers({
+page: postsPageReducer,
+entities: postsEntitiesReducer,
+});
+
++las distintas partes en las que se deviden se encargan en distintas partes del store 
+
++para dividirlo, creamos una funcion nueva 
+
+//VIDEO 39 DATOS INMUTABLES CON Immutable.js
+
++como utilizar datos inmutables, facebook la crea para trabajar mas facil con flux y con react
++push es mutable y concat no lo es, Object.assign crea un nuevo objeto con nuevo espacio en memoria
++para eso utilizamos immutable-js,  list se refiere a arreglos, Map los objetos comuines de javascript
+OrderdMap, Set se refiere a que ningun elemento se repite, Stack es donde cada elemente siempre se pone
+al inicio de la lista, Record es lo mas similar a una clase funcional 
+
++para installar utilizamos npm install immutable redux-immutable nos ayuda a trabajar con redux
+e immutable los dos al mismo tiempo npm i -S immutable redux-immutable
++para indicar que todo el dato sea inmutable se utiliza fromJS y to toJS()
+cuando estamos en immutable es mas facil trabajar con mapas y al utilizar mapas es facil acceder 
+un dato de store
++para hacer una key, agregar el metodo .get('')
++reduce nos permite convertir un array en otro dato 
++el legth se cambia por un size en immutable
+
+//VIDEO 40 HERRAMIENTAS DE DESARROLLO DE REDUX 
+
++redux-devtool-extensions
++para installarlas se utiliza npm install -save redux-devtools-extension  
+npm i -S redux-devtools-extension 
+
++esto nos importa una funcion llamada composeWithDevTools 
+
+//VIDEO 44 ACTUALIZAR A LA ULTIMA VERSION DE ReactRouter
+
++para desintalar react-router se utilza el siguiente comando npm rm -S react-router
+
++despues de desistalar react-route npm i -S react-router-dom@next
+
++La razón de instalar react-router-dom y no react-router es que desde ahora React Router va a 
+soportar una versión para aplicaciones web (-dom) tanto en el cliente como en el servidor y 
+una versión para aplicaciones de React Native (-native). En nuestro caso nos vamos a concentrar 
+en la versión para web.
+
+//VIDEO 50 CARGAR GALERIA DE IMAGENES CON LAZY LOAD
+
++para instalar utilizamos npm i -S react-lazy-image
+
++solo importamos y despues agregamos la url donde queremos que se muestran las imagenes
+
+//VIDEO 51 ANIMACIONES CON RectCssTransitionGroup
+
++este componente biene
+
++sirve apara agregar animaciones a componentes de React 
++hay tres tipos de animaciones que se pueden agragar que son: 
+APIRE: cuando el componente entra y se monta
+ENTER: cuando entra un nuevo componente dentro de una lista 
+LIFE: cuando un elemento se va 
+
+easydevtuts.com

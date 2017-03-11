@@ -1,0 +1,174 @@
+
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+Curso profesional de React con Redux
+Curso profesional de React con Redux
+Artículo Actualizando a la última versión de React Router
+Curso profesional de React con Redux
+Sergio Xalambrí
+23 PlatziRank
+Ene. 31, 2017
+React Router actualizó su API pública, por eso es necesario que cambiemos como la forma en la que usamos esta librería. Para eso vamos a tomar el proyecto que hicimos y actualizarlo.
+
+Lo primero que vamos a hacer es desinstalarlo con el comando:
+
+npm rm -S react-router
+Y luego vamos a instalar react-router-dom con el comando:
+
+npm i -S react-router-dom@next
+La razón de instalar react-router-dom y no react-router es que desde ahora React Router va a soportar una versión para aplicaciones web (-dom) tanto en el cliente como en el servidor y una versión para aplicaciones de React Native (-native). En nuestro caso nos vamos a concentrar en la versión para web.
+
+Actualizando el servidor de render
+
+Vamos a ir a source/server.jsx y vamos a dejar de importar react-router, en vez de eso vamos a importar:
+
+import { StaticRouter } from'react-router-dom';
+Acá podemos ver el primer cambio, en vez de importar ServerRouter ahora importamos StaticRouter y ya no necesitamos createServerRenderContext. Luego de cambiar este import vamos cambiar la siguiente línea.
+
+const context = createServerRenderContext();
+Y vamos a colocar:
+
+const context = {};
+Como vemos es simplemente crear un objeto vacío en vez de ejecutar una función. Luego tenemos que modificar donde hacemos el renderToString para usar StaticRouter quedando algo así:
+
+const html = renderToString(
+	<Providerstore={store}><IntlProviderlocale={locale}messages={messages[locale]}><StaticRouterlocation={request.url}context={context}><Pages /></StaticRouter></IntlProvider></Provider>,
+);
+De esta forma ya estamos haciendo el render con los nuevos componentes de React Router. Ahorat tenemos que eliminar la línea donde obteníamos el resultado del contexto.
+
+const result = context.getResult();
+Ya que el resultado va a estar directamente en el objecto context que creamos antes. De igual forma vamos a cambiar la validación de result.missed por context.url y vamos a usar este mismo context.url donde antes definíamos el Location al hacer redirect. Quedando algo similar a esto:
+
+if (context.url) {
+	response.writeHead(301, {
+		Location: context.url,
+	});
+	response.end();
+}
+Un último cambio es que React Router ya nos dice si no encontró la URL (un 404) por lo que tanto la condición como el doble render que había que hacer es innecesario y podemos eliminarlos.
+
+Actualizando nuestras rutas
+
+Lo siguiente que vamos a actualizar es el archivo source/pages/containers/Page.jsx. Al igual que antes vamos a cambiar la línea donde importamos React Router quedando así:
+
+import {
+	Route,
+	Switch,
+} from'react-router-dom';
+Como vemos en vez de Match y Miss importamos Route y Switch. Luego en todos los lugares donde usábamos Match y Miss tenemos que usar Route quedando así:
+
+{/* List de artículos */}
+<Route
+	path="/"
+	exact
+	component={Home}
+/>
+{/* Detalle de artículo */}
+<Route
+	path="/post/:id"
+	exact
+	component={Post}
+/>
+{/* Perfil de usuario */}
+<Route
+	path="/user/:id"
+	exact
+	component={Profile}
+/>
+{/* Galería de fotos */}
+<Route
+	path="/gallery"
+	exact
+	component={Gallery}
+/>
+{/* Error 404 */}
+<Route component={Error404} />
+Como vemos el prop pattern ahora se llama path y exactly es exact. El resto de props es igual. Otra cosa que vamos a hacer es envolver todos estos componente en Switch.
+
+Este componente Switch lo que hace es que una vez una de las rutas haga render deja de verificar las otras rutas de la aplicación. Sin usar este componente React Router verificaría cada ruta definidia y si más de un componente hacía match entonces renderizaba todos esos componentes (pudiendo ser N). Switch nos evita eso completamente, solo permitiendo una ruta.
+
+El código de nuestro componente Page quedaría algo así al final:
+
+functionPages() {
+	return (
+		<main role="application">
+			<Header />
+
+			<Switch>
+				{/* List de artículos */}
+				<Route
+					path="/"
+					exact
+					component={Home}
+				/>
+				{/* Detalle de artículo */}
+				<Route
+					path="/post/:id"
+					exact
+					component={Post}
+				/>
+				{/* Perfil de usuario */}
+				<Route
+					path="/user/:id"
+					exact
+					component={Profile}
+				/>
+				{/* Galería de fotos */}
+				<Route
+					path="/gallery"
+					exact
+					component={Gallery}
+				/>
+				{/* Error 404 */}
+				<Route component={Error404} />
+			</Switch>
+		</main>
+	);
+}
+Importando el componente Link y BrowserRouter
+
+Lo siguiente que vamos a hacer es muy simple, en todos los lugares donde importamos Link de React Router vamos a cambiar el import y vamos a usar la siguiente línea:
+
+import { Link } from'react-router-dom';
+Simplemente es importar Link de react-router-dom. Luego vamos a ir a source/client.jsx y vamos a cambiar el import de BrowserRouter para importarlo de react-router-dom.
+
+import { BrowserRouter } from'react-router-dom';
+Con esto ya cambiamos todos los imports necesarios y estamos usando los nuevos componentes de React Router. Hay un último cambio que hacer y es cambiar un dato dentro de dos de nuestras página.
+
+Obteniendo parámetros de la URL
+
+En los componentes source/pages/containers/Post.jsx y source/pages/containers/Profile.jsx obteníamos un prop llamado params que era un objeto con todos los parámetros de la URL, como por ejemplo el id del post o usuario cuyo detalle estábamos viendo. Ahora para poder acceder a este datos es necesario usar un prop llamado match que posee el objeto params.
+
+Eso significa que ahora el initialFetch de Post.jsx va a hacer el fetch de la siguiente forma:
+
+const [
+  post,
+  comments,
+] = awaitPromise.all([
+  api.posts.getSingle(this.props.match.params.id),
+  api.posts.getComments(this.props.match.params.id),
+]);
+Y el initialFetch de Profile.jsx va a hacerlo así:
+
+const [
+  user,
+  posts,
+] = awaitPromise.all([
+  api.users.getSingle(this.props.match.params.id),
+  api.users.getPosts(this.props.match.params.id),
+]);
+Y a su vez el propTypes de ambos componentes va a ser el tener el siguiente:
+
+match: PropTypes.shape({
+  params: PropTypes.shape({
+    id: PropTypes.string,
+  }),
+}),

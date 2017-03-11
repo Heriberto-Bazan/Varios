@@ -1,0 +1,272 @@
+Artículo Pruebas de componentes de React
+Curso profesional de React con Redux
+Sergio Xalambrí
+23 PlatziRank
+Ene. 4, 2017
+En el material anterior vimos que es una prueba automatizada y como hacer una prueba de un reducer. Ahora vamos a ver como usar esa misma técnica para probar componentes puros de React.
+
+¿Por qué componentes puros y no contenedores?
+
+Los componentes puros al ser funciones es muy fácil aplicarle pruebas ya que simplemente hay que hacer que rendericen con ciertos datos y ver el resultado y si ese componente puede renderizar dos UI diferentes dependiendo de una condición entonces es cuestión de hacer dos render con diferentes datos y ver ambos resultados.
+
+En cambio en un contenedor no solo se trata de hacer pruebas de lo que renderiza, también es necesario probar que los métodos del ciclo de vida funcionen, que cualquier otro método como eventos funcionen, etc.
+
+Por esta razón en este caso vamos a ver como hacer una prueba simple de que un componente renderice.
+
+Configurando el entorno de pruebas
+
+Antes vimos como instalar y usar Jest y solo creamos unos pocos scripts en el package.json y el archivo de Babel. Ahora vamos a ver como configurar Jest para realizar distintas funciones.
+
+Lo primero que vamos a hacer es en el archivo package.json vamos a agregar una propiedad jest, esa propiedad es la que vamos a usar para configurar Jest, ahí vamos a colocar el siguiente contenido.
+
+"jest": {
+  "moduleFileExtensions": [
+    "js",
+    "jsx"
+  ],
+  "moduleDirectories": [
+    "node_modules"
+  ],
+  "moduleNameMapper": {
+    "\\.(css)$": "/__mocks__/styleMock.js"
+  },
+  "notify": true
+}
+Vemos que hay muchas cosas, lo primero es moduleFileExtensions, eso es para que Jest sepa que extensiones vamos a usar en nuestros módulos. La propiedad moduleDirectories sirve para indicarle nuestras carpetas de módulos, útil si queremos además de node_modules tener una carpeta de módulos propios.
+
+También tenemos notify que es para activar notificaciones cuando terminen de correr las pruebas, esto nos sirve para solo tener que ir a revisar la consola cuando nos avisa que alguna prueba falló.
+
+Otra propiedad un poco más compleja es moduleNameMapper, esta es un mapa donde como nombre de llave usamos una expresión regular y como valor usamos un path a un archivo, esto nos sirve para hacer mocks de ciertos archivos (los que entren en la expresión regular).
+
+En nuestro caso usamos una expresión para obtener todos los archivos .css y le decimos que use como mock un archivo ubicado en la carpeta __mocks__ ubicada en la raíz del proyecto y en ese archivo vamos a simplemente exportar un objeto vacío.
+
+module.exports = {};
+Esto nos sirve para que Jest devuelva un objeto vacío cuando encuentra un componente que este importando un CSS, de esta forma podemos seguir importando estos archivos para usar CSS Modules y no nos afecta a las pruebas.
+
+También vamos a modificar nuestra lista de loaders en el .babelrc para incluir el de React ya que vamos a usar JSX, quedando así:
+
+{
+  "env": {
+    "test": {
+      "presets": ["latest-minimal", "react"]
+    }
+  }
+}
+Por último vamos a instalar desde npm la librería react-test-renderer que nos va a permiter renderizar nuestros componente en nuestras pruebas sin necesidad de simular un DOM.
+
+npm i -D react-test-renderer
+Con eso listo ya tenemos todo configurado.
+
+Haciendo nuestra primera prueba
+
+Vamos empezar a hacer pruebas de nuestros componentes, para eso vamos a tomar el componente de un comentario ubicado en source/comments/components/Comment.jsx, el cual es 100% puro y vamos a crear un archivo Comment.test.jsx junto a nuestro componente.
+
+En ese archivo vamos a importar React, el renderer que instalamos antes y nuestro componente.
+
+import React from'react';
+import renderer from'react-test-renderer';
+
+import Comment from'./Comment.jsx';
+Luego vamos a crear un test donde indicamos que esperamos que renderice todo bien.
+
+import React from'react';
+import renderer from'react-test-renderer';
+
+import Comment from'./Comment.jsx';
+
+
+test('Comment should render the component', () => {
+});
+Y dentro de la prueba vamos a hacer algo muy simple, vamos a usar renderer.create para renderizar Comment y vamos a transformar el resultado a un JSON.
+
+import React from'react';
+import renderer from'react-test-renderer';
+
+import Comment from'./Comment.jsx';
+
+
+test('Comment should render the component', () => {
+  const tree = renderer.create(<Comment />).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+Esto al igual que con nuestro reducer va a generar un snapshot con el resultado de renderizar el componente, que en nuestro caso va a ser el HTML que este devuelve.
+
+Si corremos nuestra prueba vamos a ver el siguiente error.
+
+FAIL  source/comments/components/Comment.test.jsx
+ ? Comment should render the component
+
+   Invariant Violation: [React Intl] Could not find required `intl` object.  needs to exist in the component ancestry.
+Eso ocurre porque nuestro componente utiliza React Intl para mostrar un mensaje y como no usamos IntlProvider entonces ese mensaje no existe en nuestra aplicación. Para solucionar esto vamos importar este provider y vamos a envolver el componente en este.
+
+import React from'react';
+import renderer from'react-test-renderer';
+import { IntlProvider } from'react-intl';
+
+import Comment from'./Comment.jsx';
+
+import messages from'../../messages.json';
+
+
+test('Comment should render the component', () => {
+  const tree = renderer.create(
+    <IntlProviderlocale="es"messages={messages.es}><Comment />IntlProvider>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+Listo, ahora vamos a ver que nuestra pruebo pasó correctamente y todo esta bien, pero si revisamos el snapshot que genero deberíamos tener algo así:
+
+exports[`test Comment should render the component 1`] = `
+"comment-undefined">
+"__html": "Por: " target="_blank">",
+        }
+      } />
+
+`;
+Como vemos hay undefineds por todas partes, esto es porque renderizamos el componente sin los datos de un comentarios y como este no los tiene marcados como requeridos entonces no nos dice que faltan datos.
+
+Lo primero que vamos a hacer entonces es marcar todos nuestros props como requeridos en nuestro componente.
+
+Comment.propTypes = {
+  id: PropTypes.number.isRequired,
+  email: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+};
+Así quedarías nuestros propTypes, luego si vemos el resultado de las pruebas vamos a ver que aunque sigue pasando (ya que el componente no se rompe) nos muestra un montón de errores.
+
+console.error node_modules/fbjs/lib/warning.js:36
+  Warning: Failed prop type: The prop `id` is marked as required in `Comment`, but its value is `undefined`.
+      in Comment
+console.error node_modules/fbjs/lib/warning.js:36
+  Warning: Failed prop type: The prop `email` is marked as required in `Comment`, but its value is `undefined`.
+      in Comment
+console.error node_modules/fbjs/lib/warning.js:36
+  Warning: Failed prop type: The prop `name` is marked as required in `Comment`, but its value is `undefined`.
+      in Comment
+console.error node_modules/fbjs/lib/warning.js:36
+  Warning: Failed prop type: The prop `body` is marked as required in `Comment`, but its value is `undefined`.
+      in Comment
+Acá nos está diciendo que undefined no pasa los props, entonces para arreglar esto vamos a modificar la prueba para pasarlos datos falsos al comentarios y verificar que todo funcione bien.
+
+import React from'react';
+import renderer from'react-test-renderer';
+import { IntlProvider } from'react-intl';
+
+import Comment from'./Comment.jsx';
+
+import messages from'../../messages.json';
+
+
+const comment = {
+  id: 1,
+  email: 'cursos@platzi.com',
+  name: 'Platzi Team',
+  body: 'Este es un comentario de prueba',
+};
+
+
+test('Comment should render the component', () => {
+  const tree = renderer.create(
+    <IntlProviderlocale="es"messages={messages.es}><Comment {...comment} />IntlProvider>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+Ahora Jest va a decirnos que las prueba falló a que el resultado que devolvió el componente es diferente al que esperábamos según el snapshot.
+
+FAIL  source/comments/components/Comment.test.jsx
+ ? Comment should render the component
+
+   expect(value).toMatchSnapshot()
+
+   Received value does not match stored snapshot 1.
+
+   - Snapshot
+   + Received
+
+   @@ -1,15 +1,17 @@
+    
+"comment-undefined">
+   +  id="comment-1">
+"__html": "Por: " target="_blank">",
+   +          "__html": "Por: " target="_blank">Platzi Team",
+            }
+          } />
+
+   +    className={undefined}>
+   +    Este es un comentario de prueba
+   +  
+
+
+
+     at Object..test (source/comments/components/Comment.test.jsx:25:16)
+     at process._tickCallback (internal/process/next_tick.js:103:7)
+Pero vemos que esto ocurre porque el resultado nuevo es el correcto usando los datos esperados, así que lo que vamos a hacer es correr nuestro script test:fix o si estábamos usando test:watch podemos simplemente apretar u en nuestra terminal y Jest va a corregir los snapshots y volver a correr las pruebas, ahí entonces vamos a ver que ya pasaron todas las pruebas sin problemas.
+
+PASS  source/comments/components/Comment.test.jsx
+PASS  source/reducer.test.js
+
+Snapshot Summary
+› 1 snapshot updated in 1 test suite.
+
+Test Suites: 2 passed, 2 total
+Tests:       2 passed, 2 total
+Snapshots:   1 updated, 1 passed, 2 total
+Time:        0.183s, estimated 1s
+Y si vemos nuestro snapshot vamos a ver el siguiente resultado.
+
+exports[`test Comment should render the component 1`] = `
+"comment-1">
+"__html": "Por: " target="_blank">Platzi Team",
+        }
+      } />
+
+    Este es un comentario de prueba
+  
+
+
+`;
+Vemos que todavía hay unos undefined por ahí, estos son los nombres de clases que normalmente genera CSS Modules, como nosotros estamos usando un mock para el procesamiento de nuestras hojas de estilos entonces el valor que obtenemos el undefined.
+
+Para arreglar esto tendríamos que ir a nuestro archivo styleMock.js y crear una propiedad con cada nombre de clase que usamos que sea igual a un valor, por ejemplo algo así.
+
+module.exports = {
+  comment: 'comment',
+  meta: 'meta',
+};
+Con esto vamos a ver que nuestra prueba fallá ya que ahora en vez de undefined va a usar comment y meta como nombres de clases. Sin embargo hacer esto a mano es molesto ya que aplicaría a todos los componentes, por lo que podemos o hacer a mano cada nombre de clase o simplemente dejarlo como undefined y no prestarle atención.
+
+Obteniendo un reporte de cobertura.
+
+Por último les quiero mostrar como generar un reporte en la consola de que tanto probamos nuestros componentes, llamado reporte de cobertura (coverage en inglés). Esto nos sirve para saber si estamos probando todos los casos posibles de un módulo.
+
+Para esto vamos a correr Jest con el parámetro --coverage, podemos modificar nuestros scripts en el package.json para agregar uno llamado test:coverage.
+
+"test:coverage": "jest --coverage"
+Si corremos este comando vamos a ver entonces en la consola un reporte de que archivos se están probando y que tanto se probaron.
+
+PASS  source/comments/components/Comment.test.jsx
+PASS  source/reducer.test.js
+----------------------------|----------|----------|----------|----------|----------------|
+File                        |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+----------------------------|----------|----------|----------|----------|----------------|
+All files                   |    30.36 |    36.36 |    43.75 |    30.36 |                |
+source                     |    27.78 |    36.36 |       40 |    27.78 |                |
+ actions.js                |     5.88 |      100 |    11.11 |     5.88 |... 55,56,57,60 |
+ api.js                    |       10 |        0 |      100 |       10 |... 34,39,40,41 |
+ reducer.js                |    70.59 |       50 |    83.33 |    70.59 | 20,30,32,56,64 |
+source/comments/components |      100 |      100 |      100 |      100 |                |
+ Comment.jsx               |      100 |      100 |      100 |      100 |                |
+----------------------------|----------|----------|----------|----------|----------------|
+
+Test Suites: 2 passed, 2 total
+Tests:       2 passed, 2 total
+Snapshots:   2 passed, 2 total
+Time:        3.577s
+Ran all test suites.
+Y vemos algo interesante, no solo estamos haciendo pruebas del componente Comment.jsx y el reducer.js si no que también de actions.js y api.js, estos últimos dos debido a que al probar reducer.js importamos actions.js y este a su vez importa api.js. Y de todo su código solo probamos una muy pequeña parte de estos ya que usamos el mínimo necesario.
+
+Así que les propongo que además de probar el resto de componentes puros (Layout.jsx, Header.jsx, Loading.jsx y Title.jsx) que traten de llegar a 100% de coverage en los creadores de acciones y el API. Estos últimos va a requerir que investiguen en la documentación de Jest como hacer para crear un mock de la función Fetch para evitar la petición a la API.

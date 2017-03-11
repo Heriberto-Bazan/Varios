@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://fb.me/react-with-addons-0.12.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.12.0.js"></script>
+  </head>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+  <body>
+
+
+       <div class="container">
+         <img src="Imagenes/gota.jpg" class="img-thumbnail" alt="Gota" />
+           <div id="ejemplo"></div>
+            <div id="formulario"></div>
+            <div id="formulario1"></div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+       </div>
+
+        <script type="text/jsx">
+
+        var Componente = React.createClass({
+              render:function(){
+                return (<h1>Comunicación {this.props.descripcion}</h1>);
+              }
+         });
+        var ComponenteFormulario = React.createClass({
+            render : function() {
+              return React.DOM.div({
+                        className:'form-group',
+                        children : [
+
+                          React.DOM.label({
+                            htmlFor:'exampleInputEmail1',
+                            children:this.props.etiqueta,
+                            name:"Lbl"+this.props.nombre
+                          }),
+                          React.DOM.input({
+                            type:"text",
+                            className:"form-control",
+                            name:"txt"+this.props.nombre,
+                            placeholder:this.props.etiqueta
+                            })
+                        ]
+                      });
+
+            }
+        });
+
+
+        React.renderComponent(<Componente descripcion="Interna"/>,document.getElementById('ejemplo'));
+        React.renderComponent(<ComponenteFormulario nombre="nombre" etiqueta="Ingresa tu email:"/>, document.getElementById('formulario'));
+        React.renderComponent(<ComponenteFormulario nombre="nombre" etiqueta="Ingresa tu Password:"/>, document.getElementById('formulario1'));
+
+        </script>
+  </body>
+</html>

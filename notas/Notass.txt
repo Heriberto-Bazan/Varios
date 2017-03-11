@@ -1,0 +1,31 @@
+http://www.enrique7mc.com/2016/06/propiedades-en-react-js/
+//RENDER rendertoString
+Si utiliza reaccionar como una etiqueta de script, estas API de alto nivel están disponibles en el 
+ReactDOMServermundial. Si utiliza ES6 con NPM, puede escribir 
+import ReactDOMServer from 'react-dom/server'. Si utiliza ES5 con NPM,
+ puede escribir var ReactDOMServer = require('react-dom/server').
+
+Visión de conjunto
+La ReactDOMServerclase le permite procesar sus componentes en el servidor.
+
+renderToString()
+renderToStaticMarkup()
+Referencia
+renderToString()
+ReactDOMServer.renderToString(element)
+Rendir un elemento reaccionar a su HTML inicial. Esto sólo se debe utilizar en el servidor. 
+Reaccionar devolverá una cadena HTML. Puede utilizar este método para generar HTML en el servidor
+y enviar el marcado abajo en la solicitud inicial de cargas de páginas más rápido y para permitir 
+que los motores de búsqueda para rastrear sus páginas para fines de SEO.
+
+Si se llama ReactDOM.render()en un nodo que ya tiene esta marcado rendido servidor, 
+Reaccionar preservará y sólo asociar controladores de eventos, que le permite tener una experiencia 
+de primera carga de buen calidad.
+
+Un snapshot es una captura, como si fuera una foto, de una maquina virtual con sus datos y 
+dispositivos en un momento dado. Luego de crear el snapshot y continuar trabajando con la
+Maquina Virtual es posible regresar a un estado anterior de la misma recuperando cualquiera de 
+los snapshots
+
+Un template es un conjunto de archivos que determinan la estructura y el aspecto visual de un sitio
+ web, y tiene como ventaja principal disminuir tiempos y costos de desarrollo.28 may. 2013

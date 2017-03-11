@@ -1,0 +1,29 @@
+
+
+--cuando se instala node se instala la paqueteria NPM
+
+NPM
+*es el gestor de paquetes de modules de node y de js
+
+COMANDO PARA VERIFICAR QUE VERSION ES DE NODE.JS
+*node -v
+
+COMANDO PARA VERIFICAR QUE VERSION DE NPM
+*npm-v
+
+COMANDO PARA INSTALLAR react
+*npm i react
+
+COMANDO PARA INICIAR UN PROYECTO EN JS UTILIZANDO NPM
+*npm init --yes
+
+COMANDOS BASICOS PARA INSTALLAR
+*npm install webpack -g
+
+--Dependencias 
+
+PARA INSTALLAR react Y react-dom
+nmp i -S react react-dom
+
+
+instalar dependencias en React para los proyectos a realizar 
